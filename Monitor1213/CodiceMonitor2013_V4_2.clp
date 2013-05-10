@@ -1,9 +1,12 @@
 ; Questo programma contiene la bozza di codice CLIPS per MONITOR 2013
 ;
-; Una descrizione metodologica è contenuta nel file Monitor-2013 (defmodule MAIN (export ?ALL))
+; Una descrizione metodologica è contenuta nel file Monitor-2013
+(defmodule MAIN (export ?ALL))
 
 ;; LE AZIONI CHE PUÓ FARE UAV:
 (deftemplate exec
+;;occhio!
+	  (slot time)
       (slot step) 
       (slot action 
       (allowed-values go-forward go-left go-right loiter loiter-monitoring inform done))
@@ -208,7 +211,8 @@
 	(focus ENV)) ;;;;   *****************************
 ;;;;   *****************************
 ;;                 MODULO ENV
-;;;;   ***************************** (defmodule ENV (import MAIN ?ALL)(export ?ALL)) ;; OGNI CELLA CONTIENE IL NUMERO DI RIGA E DI COLONNA , che COSA CONTIENE all’inizio (type) e il suo stato vero (actual) 
+;;;;   *****************************
+(defmodule ENV (import MAIN ?ALL)(export ?ALL)) ;; OGNI CELLA CONTIENE IL NUMERO DI RIGA E DI COLONNA , che COSA CONTIENE all’inizio (type) e il suo stato vero (actual) 
 (deftemplate actual_cell 
                   (slot pos-r)
                   (slot pos-c)
@@ -376,7 +380,8 @@
             (penalty 0))
       (retract ?f1 ?f2)
       (focus MAIN)) ;;--------------------------------------------------------------------------------------------------------------
-;;   REGOLE DI go-forward (defrule go-forward-north-ok 
+;;   REGOLE DI go-forward
+(defrule go-forward-north-ok 
    (declare (salience 20))    
   ?f2<- (status (step ?i) (time ?t)) 
         (exec (step ?i) (action  go-forward))
@@ -622,7 +627,8 @@
     (modify ?f2 (step (+ ?i 1)) (time (+ ?t 50))))
  ;;;;******************************
 ;;;;******************************
-;;;;          DONE  (defrule done-undiscovered1
+;;;;          DONE  
+(defrule done-undiscovered1
    (declare (salience 21))    
   ?f2<- (status (step ?i)) 
         (exec (step ?i) (action  done))
@@ -631,7 +637,8 @@
   ?f1<- (penalty ?p)
         => (assert (penalty (+ ?p 1000000)))
            (retract ?f1 ?f3)
-           ) (defrule done-undiscovered2
+           )
+(defrule done-undiscovered2
    (declare (salience 21)) 
   ?f2<- (status (step ?i)) 
         (exec (step ?i) (action  done))
@@ -662,7 +669,8 @@
            (focus MAIN)
 ) ;;;;******************************
 ;;;;******************************
-;;;;          INFORM (defrule inform-precise-no-utility
+;;;;          INFORM
+(defrule inform-precise-no-utility
    (declare (salience 20))    
   ?f2<- (status (step ?i) (time ?t)) 
         (exec (step ?i) (action  inform) (param1 ?x) (param2 ?y) 
@@ -676,7 +684,8 @@
            (modify  ?f4 (step (+ ?i 1)))
            (retract ?f3)
            (assert (penalty (+ ?p 50000)))
-) (defrule inform-precise-useful
+)
+(defrule inform-precise-useful
    (declare (salience 20))    
   ?f2<- (status (step ?i) (time ?t)) 
         (exec (step ?i) (action  inform) (param1 ?x) (param2 ?y) 
@@ -704,7 +713,8 @@
            (modify  ?f4 (step (+ ?i 1)))
            (retract ?f3)
            (assert (penalty (+ ?p 1000000)))
-) (defrule inform-abstract-useful
+)
+(defrule inform-abstract-useful
    (declare (salience 20))    
   ?f2<- (status (step ?i) (time ?t)) 
         (exec (step ?i) (action  inform) (param1 ?x) (param2 ?y) (param3 flood))
@@ -714,7 +724,8 @@
         => (modify  ?f1 (step (+ ?i 1))(time (+ ?t 1)) (dur-last-act 1))
            (modify  ?f2 (step (+ ?i 1))(time (+ ?t 1)))
            (modify  ?f4 (step (+ ?i 1))(discover abstract))
-) (defrule inform-abstract-wrong
+)
+(defrule inform-abstract-wrong
    (declare (salience 20))    
   ?f2<- (status (step ?i) (time ?t)) 
         (exec (step ?i) (action  inform) (param1 ?x) (param2 ?y) (param3 flood))
@@ -746,7 +757,8 @@
 ;;  se non c'è stato aggiornamento allo step corrente di discovered di una cella 
 ;;  si aggiorna dicovered a step corrente e sulla base della durata dell'ultima 
 ;;  azione eseguita
-;;  si aggiornano le penalità (defrule Evolution1       
+;;  si aggiornano le penalità
+(defrule Evolution1       
 	(declare (salience 10))
 	(status (step ?i) (time ?t))
 ?f1<-	(discovered (step =(- ?i 1)) (pos-r ?r) (pos-c ?c) (discover no))
@@ -772,7 +784,9 @@
 	(modify ?f1 (step ?i))
 	(assert (penalty (+ ?p (* 6 ?dur))))
 	(retract ?f2)	
-) (defrule Evolution3       
+)
+
+(defrule Evolution3       
 	(declare (salience 10))
 	(status (step ?i) (time ?t))
 ?f1<-	(discovered (step =(- ?i 1)) (pos-r ?r) (pos-c ?c) (discover no))
@@ -784,7 +798,9 @@
 	(modify ?f1 (step ?i))
 	(assert (penalty (+ ?p (* 4 ?dur))))
 	(retract ?f2)	
-) (defrule Evolution4       
+)
+
+(defrule Evolution4       
 	(declare (salience 10))
 	(status (step ?i) (time ?t))
 ?f1<-	(discovered (step =(- ?i 1)) (pos-r ?r) (pos-c ?c) (discover no))
@@ -810,7 +826,9 @@
 	(modify ?f1 (step ?i))
 	(assert (penalty (+ ?p (* 5 ?dur))))
 	(retract ?f2)	
-) (defrule Evolution6       
+)
+
+(defrule Evolution6       
 	(declare (salience 10))
 	(status (step ?i) (time ?t))
 ?f1<-	(discovered (step =(- ?i 1)) (pos-r ?r) (pos-c ?c) (discover abstract))
@@ -1441,5 +1459,5 @@
     =>  (printout t crlf crlf)
         (printout t "aziono 0")
         (printout t crlf crlf)
-        (assert (exec (go-forward) (time 0))))
+        (assert (exec (action go-forward) (step 0))))
 

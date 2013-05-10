@@ -104,7 +104,7 @@ public class MonitorModel extends ClipsModel {
 			int c = new Integer(robot[1]);
 			direction = robot[2];
                         //BM: controllare come aggiornarlo
-                        durlastact = Integer.parseInt(robot[3]);
+                        durlastact = new Integer(robot[3]);
 			//loaded = robot[3].equalsIgnoreCase("yes");
 			map[r - 1][c - 1] = "robot";
 		}
