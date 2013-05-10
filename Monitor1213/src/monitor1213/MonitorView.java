@@ -110,7 +110,7 @@ public class MonitorView extends ClipsView implements Observer {
 				String loaded = "";
 				if (mapString[i][j].equals("robot")) {
 					direction = model.getDirection();
-                                        //BM: ricontrollre
+                                        //BM: ricontrollare
 //					if (model.isLoaded()) {
 //						loaded = "Debris";
 //					}
