@@ -117,6 +117,7 @@ public class MonitorModel extends ClipsModel {
 			System.out.println("TIME: " + time + " RESULT: " + result);
 		}
 		System.out.println("...AGGIORNATO LO STATUS...");
+                //BM: Qui ci vuole un 3* parametro
 		String[] arrayExec = {"action", "param1", "param2"};
 		String[] exec = core.findFact("MAIN", "exec", "= ?f:time " + time, arrayExec);
 		if (exec[0] != null && exec[0].equalsIgnoreCase("inform")) {
@@ -193,7 +194,8 @@ public class MonitorModel extends ClipsModel {
 		return maxduration;
 	}
         
-        /**metodo per ottenere il tempo massimo a disposizione dell'agente
+        //BM: verificare a cosa serve il campo
+        /**metodo per ottenere il campo dur-last-act
 	 * 
 	 * @return il tempo massimo come intero
 	 */
