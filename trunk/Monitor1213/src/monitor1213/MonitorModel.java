@@ -12,6 +12,7 @@ public class MonitorModel extends ClipsModel {
         //BM: a noi non serve
 	//private boolean loaded;
 	private String direction;
+        private Integer step;
 	private Integer time;
 	private Integer maxduration;
 	private String result;
@@ -34,6 +35,7 @@ public class MonitorModel extends ClipsModel {
             //BM: da rivedere - forse è a posto così
 		result = "no";
 		time = 0;
+                step = 0;
 		maxduration = Integer.MAX_VALUE;
 		try {
 			System.out.println("RICERCA DEI PARAMETRI DI FINE IN CORSO...");
@@ -65,7 +67,9 @@ public class MonitorModel extends ClipsModel {
 			System.out.println(ex.toString());
 		}
 	}
-
+        
+        //ATTENZIONE: questo metodo aggiorna la mappa ogni volta che si esegue un'azione, questo perché nella loro versione il mondo era dinamico,
+        //da noi la mappa è statica!
 	/**Aggiorna la mappa leggendola dal file clips
 	 * 
 	 * @throws ClipsException 
@@ -96,7 +100,8 @@ public class MonitorModel extends ClipsModel {
 //			}
 //		}
 //		System.out.println("...INSERITE LE MACERIE...");
-		String[] arrayRobot = {"pos-r", "pos-c", "direction", "dur-last-act", "time"};
+                //probabilmente richiedere campi dur-last-act, time, step sono inutili a rappresentare il robot
+		String[] arrayRobot = {"pos-r", "pos-c", "direction", "dur-last-act", "time", "step"};
 		//"eq ?f:time " + time
 		String[] robot = core.findFact("ENV", "agentstatus", "TRUE", arrayRobot);
 		if (robot[0] != null) {
@@ -105,9 +110,12 @@ public class MonitorModel extends ClipsModel {
 			direction = robot[2];
                         //BM: controllare come aggiornarlo
                         durlastact = new Integer(robot[3]);
+                        step = new Integer(robot[5]);
 			//loaded = robot[3].equalsIgnoreCase("yes");
 			map[r - 1][c - 1] = "robot";
 		}
+                //ATTENZIONE ci sono differenza tra time/step e time degli altri, consiglio di chiedere a Torasso
+                //nel vecchio progetto ogni azione costava una unità di tempo, nel vecchio progetto veniva stampato il nostro equivalente step -> debuggare questa parte!!
 		System.out.println("...AGGIORNATO LO STATO DEL ROBOT...");
 		String[] arrayStatus = {"time", "result"};
 		String[] status = core.findFact("MAIN", "status", "TRUE", arrayStatus);
@@ -117,7 +125,7 @@ public class MonitorModel extends ClipsModel {
 			System.out.println("TIME: " + time + " RESULT: " + result);
 		}
 		System.out.println("...AGGIORNATO LO STATUS...");
-                //BM: Qui ci vuole un 3* parametro
+                //BM: Qui ci vuole un 3* parametro e anche 4*
 		String[] arrayExec = {"action", "param1", "param2"};
 		String[] exec = core.findFact("MAIN", "exec", "= ?f:time " + time, arrayExec);
 		if (exec[0] != null && exec[0].equalsIgnoreCase("inform")) {
