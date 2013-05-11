@@ -2,7 +2,7 @@ package monitor1213;
 import xclipsjni.ClipsModel;
 import xclipsjni.ClipsException;
 
-/**L'implementazione della classe ClipsModel specifica per il progetto Monitor 2012/2013.suca!
+/**L'implementazione della classe ClipsModel specifica per il progetto Monitor 2012/2013.
  *
  * @author Violanti Luca
  */
