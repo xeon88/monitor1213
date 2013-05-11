@@ -106,17 +106,19 @@ public class MonitorView extends ClipsView implements Observer {
 
 		for (int i = x - 1; i >= 0; i--) {
 			for (int j = 0; j < y; j++) {
-				String direction = "";
-				String loaded = "";
-				if (mapString[i][j].equals("robot")) {
-					direction = model.getDirection();
-                                        //BM: ricontrollare
-//					if (model.isLoaded()) {
-//						loaded = "Debris";
-//					}
-				}
-				ImageIcon icon = new ImageIcon("img" + File.separator + mapString[i][j] + direction + loaded + ".jpg");
-				Image image = icon.getImage().getScaledInstance(cellDimension, cellDimension, Image.SCALE_SMOOTH);
+// con questa chiamata non c'è ancora conoscenza dell'agente, perciò inutile!
+//				String direction = "";
+//				String loaded = "";
+//				if (mapString[i][j].equals("robot")) {
+//					direction = model.getDirection();
+//                                        //BM: ricontrollare
+////					if (model.isLoaded()) {
+////						loaded = "Debris";
+////					}
+//				}
+//				ImageIcon icon = new ImageIcon("img" + File.separator + mapString[i][j] + direction + loaded + ".jpg");
+				ImageIcon icon = new ImageIcon("img" + File.separator + mapString[i][j] + ".jpg");
+                                Image image = icon.getImage().getScaledInstance(cellDimension, cellDimension, Image.SCALE_SMOOTH);
 				icon = new ImageIcon(image);
 				map[i][j] = new JLabel(icon);
 				map[i][j].setToolTipText("(" + (i + 1) + ", " + (j + 1) + ")");

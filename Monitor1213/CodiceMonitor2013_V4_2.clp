@@ -380,6 +380,8 @@
   =>  (assert (discovered (step 0) (pos-r ?r) (pos-c ?c) (utility yes) 
                           (discover no) (abstract ok) (precise ok)))
       )
+;dur-last-action deve essere trattatato in java come intero perciò di default non sarà NA ma 0
+;aggiunto anche (halt) così è possibile premere step
  (defrule creation-start
  (declare (salience 23))
  ?f1 <-   (create-initial-setting)
@@ -387,9 +389,10 @@
  =>
     (assert (status (time 0) (step 0)(result no))
             (agentstatus  (step 0) (time 0) (pos-r 1) (pos-c 5) 
-                          (direction north) (dur-last-act NA))
+                          (direction north) (dur-last-act 0))
             (penalty 0))
       (retract ?f1 ?f2)
+      (halt)
       (focus MAIN))
 ;;--------------------------------------------------------------------------------------------------------------;;   REGOLE DI go-forward
 (defrule go-forward-north-ok 
@@ -1440,9 +1443,11 @@
 (defmodule AGENT (import MAIN ?ALL))
 (deftemplate kagent (slot time) (slot step) (slot pos-r) (slot pos-c) 
                     (slot direction))
-(deftemplate kagent_cell (slot pos-r) (slot pos-c)
-	(slot percepted) (slot visited)
-	(slot inform (allowedvalues (no ok ))
+;	DA COMPLETARE E CORREGGERE(VEDI PEZ DROPBOX)
+;(deftemplate kagent_cell (slot pos-r) (slot pos-c)
+;	(slot percepted) (slot visited)
+;	(slot inform (allowedvalues (no ok ))
+
 
 (defrule  beginagent
     (declare (salience 10))
