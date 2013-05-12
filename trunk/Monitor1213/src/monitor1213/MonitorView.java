@@ -154,7 +154,7 @@ public class MonitorView extends ClipsView implements Observer {
 				map[i][j].repaint();
 			}
 		}
-		System.out.println("TURNO > " + model.getTime());
+		System.out.println("TURNO > " + model.getStep());
 	}
 
 	/**Aggiorna i messaggi nel pannello dei messaggi
