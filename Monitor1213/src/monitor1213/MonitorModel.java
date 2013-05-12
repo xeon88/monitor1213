@@ -18,7 +18,7 @@ public class MonitorModel extends ClipsModel {
 	private String result;
 	private String communications;
 	private int score;
-        //BM: controllare come aggiornarlo
+        //BM: potrebbe non servire!
         private int durlastact;
 
 	/**Costruttore del modello per il progetto Monitor
@@ -116,20 +116,36 @@ public class MonitorModel extends ClipsModel {
 		}
                 //ATTENZIONE ci sono differenza tra time/step e time degli altri, consiglio di chiedere a Torasso
                 //nel vecchio progetto ogni azione costava una unità di tempo, nel vecchio progetto veniva stampato il nostro equivalente step -> debuggare questa parte!!
-		System.out.println("...AGGIORNATO LO STATO DEL ROBOT...");
-		String[] arrayStatus = {"time", "result"};
+//		System.out.println("...AGGIORNATO LO STATO DEL ROBOT...");
+//		String[] arrayStatus = {"time", "result"};
+//		String[] status = core.findFact("MAIN", "status", "TRUE", arrayStatus);
+//		if (status[0] != null) {
+//			time = new Integer(status[0]);
+//			result = status[1];
+//			System.out.println("TIME: " + time + " RESULT: " + result);
+//		}
+                System.out.println("...AGGIORNATO LO STATO DEL ROBOT...");
+		String[] arrayStatus = {"step", "time", "result"};
 		String[] status = core.findFact("MAIN", "status", "TRUE", arrayStatus);
 		if (status[0] != null) {
-			time = new Integer(status[0]);
-			result = status[1];
-			System.out.println("TIME: " + time + " RESULT: " + result);
+                        step = new Integer(status[0]);
+			time = new Integer(status[1]);
+			result = status[2];
+			System.out.println("STEP: " + step + " TIME: " + time + " RESULT: " + result);
 		}
 		System.out.println("...AGGIORNATO LO STATUS...");
                 //BM: Qui ci vuole un 3* parametro e anche 4*
-		String[] arrayExec = {"action", "param1", "param2"};
-		String[] exec = core.findFact("MAIN", "exec", "= ?f:time " + time, arrayExec);
+//		String[] arrayExec = {"action", "param1", "param2"};
+//		String[] exec = core.findFact("MAIN", "exec", "= ?f:time " + time, arrayExec);
+//		if (exec[0] != null && exec[0].equalsIgnoreCase("inform")) {
+//			communications = "time: " + time + ", inform about (" + exec[1] + "," + exec[2] + ")";
+//		} else {
+//			communications = null;
+//		}
+                String[] arrayExec = {"action", "param1", "param2", "param3"};
+		String[] exec = core.findFact("MAIN", "exec", "= ?f:step " + step, arrayExec);
 		if (exec[0] != null && exec[0].equalsIgnoreCase("inform")) {
-			communications = "time: " + time + ", inform about (" + exec[1] + "," + exec[2] + ")";
+			communications = "step: " + step + ", inform about (" + exec[1] + "," + exec[2] + "," + exec[3] + ")";
 		} else {
 			communications = null;
 		}
@@ -192,6 +208,14 @@ public class MonitorModel extends ClipsModel {
 	 */
 	public synchronized int getTime() {
 		return time;
+	}
+        
+        /**metodo da chiamare per ottenere il turno attuale
+	 * 
+	 * @return il turno attuale come intero
+	 */
+	public synchronized int getStep() {
+		return step;
 	}
 
 	/**metodo per ottenere il tempo massimo a disposizione dell'agente

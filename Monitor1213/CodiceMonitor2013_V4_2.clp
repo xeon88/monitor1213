@@ -1,8 +1,6 @@
 ; Questo programma contiene la bozza di codice CLIPS per MONITOR 2013;; Una descrizione metodologica è contenuta nel file Monitor-2013
 (defmodule MAIN (export ?ALL));; LE AZIONI CHE PUÓ FARE UAV:
 (deftemplate exec
-;;occhio!
-	  (slot time)
       (slot step) 
       (slot action 
       (allowed-values go-forward go-left go-right loiter loiter-monitoring inform done))
@@ -1457,12 +1455,14 @@
     (assert (kagent (time 0) (step 0)
                            (pos-r 1) (pos-c 5) (direction north)))
     )
-(defrule ask_act
- ?f <-   (status (step ?i))
-    =>  (printout t crlf crlf)
-        (printout t "action to be executed at step:" ?i)
-        (printout t crlf crlf)
-        (modify ?f (result no)))
+
+;; COMMENTATO PER VEDERLO NELL'INTERFACCIA
+;;(defrule ask_act
+;; ?f <-   (status (step ?i))
+;;    =>  (printout t crlf crlf)
+;;        (printout t "action to be executed at step:" ?i)
+;;        (printout t crlf crlf)
+;;        (modify ?f (result no)))
 
 (defrule exec_act
     (status (step ?i))
