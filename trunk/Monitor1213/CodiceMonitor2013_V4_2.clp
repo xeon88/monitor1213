@@ -1433,6 +1433,7 @@
 (declare (salience 3))
     (status (time ?t))
      => 
+		(halt) ;;aggiunta per poter usare la Step
         (focus MAIN))
 
 ;;;;;   REGOLE MINIMALI PER IL FUNZIONAMENTO DELL'AGENTE
@@ -1521,8 +1522,30 @@
 ;(assert (exec (action inform) (param1 7) (param2 6) (param3 severe-flood) (step 42)))	
 
 (defrule turno0
- ?f <-   (status (time 0))
+ ?f <-   (status (step 0))
     =>  (printout t crlf crlf)
         (printout t "aziono 0")
         (printout t crlf crlf)
         (assert (exec (action go-forward) (step 0))))
+        
+(defrule turno1
+ ?f <-   (status (step 1))
+    =>  (printout t crlf crlf)
+        (printout t "aziono 1")
+        (printout t crlf crlf)
+        (assert (exec (action go-forward) (step 1))))
+        
+(defrule turno2
+ ?f <-   (status (step 2))
+    =>  (printout t crlf crlf)
+        (printout t "aziono 1")
+        (printout t crlf crlf)
+        (assert (exec (action go-forward) (step 2))))
+        
+(defrule turno3
+ ?f <-   (status (step 3))
+    =>  (printout t crlf crlf)
+        (printout t "aziono 1")
+        (printout t crlf crlf)
+        (assert (exec (action go-forward) (step 3))))
+
