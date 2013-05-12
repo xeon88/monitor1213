@@ -276,6 +276,7 @@
              (actual_cell (pos-r 4) (pos-c 2) (type lake) (actual ok))
              (actual_cell (pos-r 4) (pos-c 3) (type urban) (actual initial-flood ))
              (actual_cell (pos-r 4) (pos-c 4) (type urban) (actual ok))
+             ;;(actual_cell (pos-r 4) (pos-c 4) (type urban) (actual initial-flood))
              (actual_cell (pos-r 4) (pos-c 5) (type rural) (actual ok))
              (actual_cell (pos-r 4) (pos-c 6) (type rural) (actual ok))
              (actual_cell (pos-r 4) (pos-c 7) (type hill) (actual ok))
@@ -1526,26 +1527,37 @@
     =>  (printout t crlf crlf)
         (printout t "aziono 0")
         (printout t crlf crlf)
-        (assert (exec (action go-forward) (step 0))))
+        (assert (exec (action go-forward) (step 0)))
+)
         
 (defrule turno1
  ?f <-   (status (step 1))
     =>  (printout t crlf crlf)
         (printout t "aziono 1")
         (printout t crlf crlf)
-        (assert (exec (action go-forward) (step 1))))
+        (assert (exec (action go-forward) (step 1)))
+)
         
 (defrule turno2
  ?f <-   (status (step 2))
     =>  (printout t crlf crlf)
-        (printout t "aziono 1")
+        (printout t "aziono 2")
         (printout t crlf crlf)
-        (assert (exec (action go-forward) (step 2))))
+        (assert (exec (action go-forward) (step 2)))
+)
         
 (defrule turno3
  ?f <-   (status (step 3))
     =>  (printout t crlf crlf)
-        (printout t "aziono 1")
+        (printout t "aziono 3")
         (printout t crlf crlf)
-        (assert (exec (action go-forward) (step 3))))
+        (assert (exec (action go-forward) (step 3)))
+)
 
+(defrule turno4
+ ?f <-   (status (step 4))
+     =>  (printout t crlf crlf)
+        (printout t "aziono 4")
+        (printout t crlf crlf)
+		(assert (exec (action inform) (param1 6) (param2 6) (param3 flood) (step 4)))
+)
