@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.text.DefaultCaret;
 import xclipsjni.ClipsView;
 
 /**
@@ -113,7 +114,10 @@ public class MonitorView extends ClipsView implements Observer {
         int cellDimension = Math.round(MAP_DIMENSION / x);
 
         messageArea = new JTextArea();
-        messageArea.setRows(5);
+        messageArea.setRows(4);
+        //rende autoscrollante la textarea dei messaggi
+        DefaultCaret caret = (DefaultCaret)messageArea.getCaret();  
+        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE); 
         JScrollPane scroll = new JScrollPane(messageArea);
         view.add(scroll, BorderLayout.CENTER);
 

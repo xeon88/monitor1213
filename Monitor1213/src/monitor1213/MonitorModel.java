@@ -101,7 +101,6 @@ public class MonitorModel extends ClipsModel {
                         String background = map[r - 1][c - 1];
 			map[r - 1][c - 1] = "robot_" + background;
 		}
-                //ATTENZIONE ci sono differenza tra time/step e time degli altri, consiglio di chiedere a Torasso
                 //nel vecchio progetto ogni azione costava una unità di tempo, nel vecchio progetto veniva stampato il nostro equivalente step -> debuggare questa parte!!
                 System.out.println("...AGGIORNATO LO STATO DEL ROBOT...");
 		String[] arrayStatus = {"step", "time", "result"};
@@ -113,9 +112,9 @@ public class MonitorModel extends ClipsModel {
 			System.out.println("STEP: " + step + " TIME: " + time + " RESULT: " + result);
 		}
 		System.out.println("...AGGIORNATO LO STATUS...");
-                //BM: Qui ci vuole un 3* parametro e anche 4*
                 String[] arrayExec = {"action", "param1", "param2", "param3"};
 		String[] exec = core.findFact("MAIN", "exec", "= ?f:step " + step, arrayExec);
+                //N.B.: la stampa di "inform..." è effettuata prima di eseguire l'azione di inform vera e propria
 		if (exec[0] != null && exec[0].equalsIgnoreCase("inform")) {
 			communications = "step: " + step + ", inform about (" + exec[1] + "," + exec[2] + "," + exec[3] + ")";
 		} else {
