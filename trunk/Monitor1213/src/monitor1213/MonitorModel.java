@@ -87,19 +87,6 @@ public class MonitorModel extends ClipsModel {
 			map[r - 1][c - 1] = mp[i][2] + "_" + mp[i][3];
 		}
 		System.out.println("...RIEMPITA BASE...");
-//		String[] arrayDebris = {"pos-r", "pos-c", "person"};
-//		String[][] debris = core.findAllFacts("ENV", "debriscontent", "TRUE", arrayDebris);
-//		for (int i = 0; i < debris.length; i++) {
-//			int r = new Integer(debris[i][0]);
-//			int c = new Integer(debris[i][1]);
-//			String person = debris[i][2];
-//			if (person.equalsIgnoreCase("yes")) {
-//				map[r - 1][c - 1] = "debris_person";
-//			} else {
-//				map[r - 1][c - 1] = "debris";
-//			}
-//		}
-//		System.out.println("...INSERITE LE MACERIE...");
                 //probabilmente richiedere campi dur-last-act, time, step sono inutili a rappresentare il robot
 		String[] arrayRobot = {"pos-r", "pos-c", "direction", "dur-last-act", "time", "step"};
 		//"eq ?f:time " + time
@@ -111,19 +98,11 @@ public class MonitorModel extends ClipsModel {
                         //BM: controllare come aggiornarlo
                         durlastact = new Integer(robot[3]);
                         step = new Integer(robot[5]);
-			//loaded = robot[3].equalsIgnoreCase("yes");
-			map[r - 1][c - 1] = "robot";
+                        String background = map[r - 1][c - 1];
+			map[r - 1][c - 1] = background + "_robot";
 		}
                 //ATTENZIONE ci sono differenza tra time/step e time degli altri, consiglio di chiedere a Torasso
                 //nel vecchio progetto ogni azione costava una unità di tempo, nel vecchio progetto veniva stampato il nostro equivalente step -> debuggare questa parte!!
-//		System.out.println("...AGGIORNATO LO STATO DEL ROBOT...");
-//		String[] arrayStatus = {"time", "result"};
-//		String[] status = core.findFact("MAIN", "status", "TRUE", arrayStatus);
-//		if (status[0] != null) {
-//			time = new Integer(status[0]);
-//			result = status[1];
-//			System.out.println("TIME: " + time + " RESULT: " + result);
-//		}
                 System.out.println("...AGGIORNATO LO STATO DEL ROBOT...");
 		String[] arrayStatus = {"step", "time", "result"};
 		String[] status = core.findFact("MAIN", "status", "TRUE", arrayStatus);
@@ -135,13 +114,6 @@ public class MonitorModel extends ClipsModel {
 		}
 		System.out.println("...AGGIORNATO LO STATUS...");
                 //BM: Qui ci vuole un 3* parametro e anche 4*
-//		String[] arrayExec = {"action", "param1", "param2"};
-//		String[] exec = core.findFact("MAIN", "exec", "= ?f:time " + time, arrayExec);
-//		if (exec[0] != null && exec[0].equalsIgnoreCase("inform")) {
-//			communications = "time: " + time + ", inform about (" + exec[1] + "," + exec[2] + ")";
-//		} else {
-//			communications = null;
-//		}
                 String[] arrayExec = {"action", "param1", "param2", "param3"};
 		String[] exec = core.findFact("MAIN", "exec", "= ?f:step " + step, arrayExec);
 		if (exec[0] != null && exec[0].equalsIgnoreCase("inform")) {
@@ -160,15 +132,6 @@ public class MonitorModel extends ClipsModel {
 	public synchronized String getCommunications() {
 		return communications;
 	}
-
-//BM: a noi non serve        
-//	/**metodo per ottenere se l'agente è carico o scarico
-//	 * 
-//	 * @return true se l'agente ha caricato dei detriti, false altrimenti
-//	 */
-//	public synchronized boolean isLoaded() {
-//		return loaded;
-//	}
 
 	/**metodo per ottenere la mappa dell'ambiente come vista nel modulo ENV.
 	 * 
