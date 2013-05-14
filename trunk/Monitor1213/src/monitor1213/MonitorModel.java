@@ -99,7 +99,7 @@ public class MonitorModel extends ClipsModel {
                         durlastact = new Integer(robot[3]);
                         step = new Integer(robot[5]);
                         String background = map[r - 1][c - 1];
-			map[r - 1][c - 1] = background + "_robot";
+			map[r - 1][c - 1] = "robot_" + background;
 		}
                 //ATTENZIONE ci sono differenza tra time/step e time degli altri, consiglio di chiedere a Torasso
                 //nel vecchio progetto ogni azione costava una unità di tempo, nel vecchio progetto veniva stampato il nostro equivalente step -> debuggare questa parte!!
