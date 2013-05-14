@@ -37,145 +37,145 @@ class ControlPanel extends JFrame implements Observer {
 	 * WARNING: NON modificare assolutamente questo metodo.
 	 */
 	@SuppressWarnings("unchecked")
-   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-   private void initComponents() {
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-      controlPanel = new javax.swing.JPanel();
-      loadFileButton = new javax.swing.JButton();
-      loadFileLabel = new javax.swing.JLabel();
-      separator = new javax.swing.JSeparator();
-      runButton = new javax.swing.JButton();
-      stepButton = new javax.swing.JButton();
-      runOneButton = new javax.swing.JButton();
-      visualizeLabel = new javax.swing.JLabel();
-      visualizeAgendaButton = new javax.swing.JCheckBox();
-      visualizeFactsButton = new javax.swing.JCheckBox();
+        controlPanel = new javax.swing.JPanel();
+        loadFileButton = new javax.swing.JButton();
+        loadFileLabel = new javax.swing.JLabel();
+        separator = new javax.swing.JSeparator();
+        runButton = new javax.swing.JButton();
+        stepButton = new javax.swing.JButton();
+        runOneButton = new javax.swing.JButton();
+        visualizeLabel = new javax.swing.JLabel();
+        visualizeAgendaButton = new javax.swing.JCheckBox();
+        visualizeFactsButton = new javax.swing.JCheckBox();
 
-      setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-      setTitle("Pannello di Controllo");
-      setMinimumSize(new java.awt.Dimension(375, 100));
-      setName("panelFrame"); // NOI18N
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Pannello di Controllo");
+        setMinimumSize(new java.awt.Dimension(375, 100));
+        setName("panelFrame"); // NOI18N
 
-      controlPanel.setMinimumSize(new java.awt.Dimension(375, 100));
-      controlPanel.setPreferredSize(new java.awt.Dimension(388, 100));
+        controlPanel.setMinimumSize(new java.awt.Dimension(375, 90));
+        controlPanel.setPreferredSize(new java.awt.Dimension(388, 90));
 
-      loadFileButton.setText("Carica Ambiente Clips");
-      loadFileButton.addActionListener(new java.awt.event.ActionListener() {
-         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            loadFileButtonActionPerformed(evt);
-         }
-      });
+        loadFileButton.setText("Carica Ambiente Clips");
+        loadFileButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadFileButtonActionPerformed(evt);
+            }
+        });
 
-      loadFileLabel.setText("Nessun file caricato");
-      loadFileLabel.setEnabled(false);
+        loadFileLabel.setText("Nessun file caricato");
+        loadFileLabel.setEnabled(false);
 
-      runButton.setText("Run");
-      runButton.setToolTipText("Esegue la Run di Clips");
-      runButton.setEnabled(false);
-      runButton.addActionListener(new java.awt.event.ActionListener() {
-         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            runButtonActionPerformed(evt);
-         }
-      });
+        runButton.setText("Run");
+        runButton.setToolTipText("Esegue la Run di Clips");
+        runButton.setEnabled(false);
+        runButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                runButtonActionPerformed(evt);
+            }
+        });
 
-      stepButton.setText("Step");
-      stepButton.setToolTipText("Esegue Run fino alla prossima azione del Robot");
-      stepButton.setEnabled(false);
-      stepButton.addActionListener(new java.awt.event.ActionListener() {
-         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            stepButtonActionPerformed(evt);
-         }
-      });
+        stepButton.setText("Step");
+        stepButton.setToolTipText("Esegue Run fino alla prossima azione del Robot");
+        stepButton.setEnabled(false);
+        stepButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stepButtonActionPerformed(evt);
+            }
+        });
 
-      runOneButton.setText("Run(1)");
-      runOneButton.setToolTipText("Esegue la Run(1) di Clips");
-      runOneButton.setEnabled(false);
-      runOneButton.addActionListener(new java.awt.event.ActionListener() {
-         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            runOneButtonActionPerformed(evt);
-         }
-      });
+        runOneButton.setText("Run(1)");
+        runOneButton.setToolTipText("Esegue la Run(1) di Clips");
+        runOneButton.setEnabled(false);
+        runOneButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                runOneButtonActionPerformed(evt);
+            }
+        });
 
-      visualizeLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-      visualizeLabel.setText("Visualizza:");
-      visualizeLabel.setEnabled(false);
+        visualizeLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        visualizeLabel.setText("Visualizza:");
+        visualizeLabel.setEnabled(false);
 
-      visualizeAgendaButton.setText("Agenda");
-      visualizeAgendaButton.setEnabled(false);
-      visualizeAgendaButton.addActionListener(new java.awt.event.ActionListener() {
-         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            visualizeAgendaButtonActionPerformed(evt);
-         }
-      });
+        visualizeAgendaButton.setText("Agenda");
+        visualizeAgendaButton.setEnabled(false);
+        visualizeAgendaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                visualizeAgendaButtonActionPerformed(evt);
+            }
+        });
 
-      visualizeFactsButton.setText("Fatti");
-      visualizeFactsButton.setEnabled(false);
-      visualizeFactsButton.addActionListener(new java.awt.event.ActionListener() {
-         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            visualizeFactsButtonActionPerformed(evt);
-         }
-      });
+        visualizeFactsButton.setText("Fatti");
+        visualizeFactsButton.setEnabled(false);
+        visualizeFactsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                visualizeFactsButtonActionPerformed(evt);
+            }
+        });
 
-      javax.swing.GroupLayout controlPanelLayout = new javax.swing.GroupLayout(controlPanel);
-      controlPanel.setLayout(controlPanelLayout);
-      controlPanelLayout.setHorizontalGroup(
-         controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-         .addGroup(controlPanelLayout.createSequentialGroup()
-            .addContainerGap()
-            .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-               .addComponent(separator, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
-               .addGroup(controlPanelLayout.createSequentialGroup()
-                  .addComponent(loadFileButton)
-                  .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                  .addComponent(loadFileLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
-                  .addGap(103, 103, 103))
-               .addGroup(controlPanelLayout.createSequentialGroup()
-                  .addComponent(runButton)
-                  .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                  .addComponent(runOneButton)
-                  .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                  .addComponent(stepButton)
-                  .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                  .addComponent(visualizeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
-                  .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                  .addComponent(visualizeAgendaButton)
-                  .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                  .addComponent(visualizeFactsButton)))
-            .addContainerGap())
-      );
-      controlPanelLayout.setVerticalGroup(
-         controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-         .addGroup(controlPanelLayout.createSequentialGroup()
-            .addGap(16, 16, 16)
-            .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-               .addComponent(loadFileButton)
-               .addComponent(loadFileLabel))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(separator)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
-               .addComponent(runButton)
-               .addComponent(runOneButton)
-               .addComponent(stepButton)
-               .addComponent(visualizeFactsButton)
-               .addComponent(visualizeAgendaButton)
-               .addComponent(visualizeLabel))
-            .addGap(68, 68, 68))
-      );
+        javax.swing.GroupLayout controlPanelLayout = new javax.swing.GroupLayout(controlPanel);
+        controlPanel.setLayout(controlPanelLayout);
+        controlPanelLayout.setHorizontalGroup(
+            controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(controlPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(separator, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
+                    .addGroup(controlPanelLayout.createSequentialGroup()
+                        .addComponent(loadFileButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(loadFileLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                        .addGap(103, 103, 103))
+                    .addGroup(controlPanelLayout.createSequentialGroup()
+                        .addComponent(runButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(runOneButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(stepButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(visualizeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(visualizeAgendaButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(visualizeFactsButton)))
+                .addContainerGap())
+        );
+        controlPanelLayout.setVerticalGroup(
+            controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(controlPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(loadFileButton)
+                    .addComponent(loadFileLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(separator, javax.swing.GroupLayout.DEFAULT_SIZE, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
+                    .addComponent(runButton)
+                    .addComponent(runOneButton)
+                    .addComponent(stepButton)
+                    .addComponent(visualizeFactsButton)
+                    .addComponent(visualizeAgendaButton)
+                    .addComponent(visualizeLabel))
+                .addContainerGap())
+        );
 
-      javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-      getContentPane().setLayout(layout);
-      layout.setHorizontalGroup(
-         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-         .addComponent(controlPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-      );
-      layout.setVerticalGroup(
-         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-         .addComponent(controlPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-      );
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(controlPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(controlPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
-      pack();
-   }// </editor-fold>//GEN-END:initComponents
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
 
 	/**azione eseguita quando si preme il bottone per il caricamento del file clips
 	 * 
@@ -256,18 +256,18 @@ class ControlPanel extends JFrame implements Observer {
 		model.setMode("RUNONE");
 		model.resume();
 	}//GEN-LAST:event_runOneButtonActionPerformed
-   // Variables declaration - do not modify//GEN-BEGIN:variables
-   private javax.swing.JPanel controlPanel;
-   private javax.swing.JButton loadFileButton;
-   private javax.swing.JLabel loadFileLabel;
-   private javax.swing.JButton runButton;
-   private javax.swing.JButton runOneButton;
-   private javax.swing.JSeparator separator;
-   private javax.swing.JButton stepButton;
-   private javax.swing.JCheckBox visualizeAgendaButton;
-   private javax.swing.JCheckBox visualizeFactsButton;
-   private javax.swing.JLabel visualizeLabel;
-   // End of variables declaration//GEN-END:variables
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel controlPanel;
+    private javax.swing.JButton loadFileButton;
+    private javax.swing.JLabel loadFileLabel;
+    private javax.swing.JButton runButton;
+    private javax.swing.JButton runOneButton;
+    private javax.swing.JSeparator separator;
+    private javax.swing.JButton stepButton;
+    private javax.swing.JCheckBox visualizeAgendaButton;
+    private javax.swing.JCheckBox visualizeFactsButton;
+    private javax.swing.JLabel visualizeLabel;
+    // End of variables declaration//GEN-END:variables
 
 	/**Metodo per ottenere un'istanza del pannello di controllo
 	 * 
