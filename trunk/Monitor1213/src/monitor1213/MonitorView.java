@@ -165,8 +165,8 @@ public class MonitorView extends ClipsView implements Observer {
                 ImageIcon icon;
                 Image image;
 
-                //cerca se nei primi 6 c'è la stringa "robot_"...
-                if (mapString[i][j].substring(0, 6).equals("robot_")) {
+                //cerca se, nei primi 6 caratteri (se ce ne sono almeno 6), c'è la stringa "robot_"...
+                if (mapString[i][j].length() >= 6 && mapString[i][j].substring(0, 6).equals("robot_")) {
                     direction = model.getDirection();
 
                     // carico 2 immagini
