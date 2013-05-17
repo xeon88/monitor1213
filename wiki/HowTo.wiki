@@ -9,7 +9,7 @@ Il progetto è stato sviluppato e testato *solo* su piattaforma Windows 7 x64, p
 
 Recuperare il file corrispondente alla versione del sistema operativo utilizzato:
   * _caso x64_:[http://www.di.unito.it/~piovesan/CLIPSJNI%2064-bit.zip CLIPSJNI.dll x64]
-  * _caso x86_:[https://code.google.com/p/xclipsjni/source/browse/trunk/XCLIPSJNI/CLIPSJNI/CLIPSJNI.dll CLIPSJNI.dll x86]
+  * _caso x86_: tasto dx sul file: [https://code.google.com/p/xclipsjni/source/browse/#svn%2Ftrunk%2FXCLIPSJNI%2FCLIPSJNI CLIPSJNI.dll x86], Salva come...
 
 e copiarlo nella cartella C:\Windows\System32.
 [Se è stato modificato il java.library.path, si può recuperarlo con il metodo: {{{System.getProperty("java.library.path");}}}]
