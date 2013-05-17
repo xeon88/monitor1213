@@ -3,7 +3,7 @@
 ===Disclaimer===
 Il progetto è stato sviluppato e testato *solo* su piattaforma Windows 7 x64, pertanto non è garantito che funzioni su altre piattaforme.
 ===Versione di NetBeans consigliata===
-[http://www.oracle.com/technetwork/java/javase/downloads/jdk-7-netbeans-download-432126.html {{{NetBeans + JDK}}}]
+[http://www.oracle.com/technetwork/java/javase/downloads/jdk-7-netbeans-download-432126.html Netbeans + JDK]
 
 ==Istruzioni==
 
