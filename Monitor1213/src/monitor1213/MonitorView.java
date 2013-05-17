@@ -109,7 +109,7 @@ public class MonitorView extends ClipsView implements Observer {
         //BM: da rivedere
         String[][] mapString = model.getMap();
         int x = mapString.length;
-        int y = mapString[0].length;
+        int y = mapString[0].length;        
         map = new JLabel[x][y];
         int cellDimension = Math.round(MAP_DIMENSION / x);
 

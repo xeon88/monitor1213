@@ -9,8 +9,6 @@ import xclipsjni.ClipsException;
 public class MonitorModel extends ClipsModel {
 
 	private String[][] map;
-        //BM: a noi non serve
-	//private boolean loaded;
 	private String direction;
         private Integer step;
 	private Integer time;
@@ -32,7 +30,6 @@ public class MonitorModel extends ClipsModel {
 	 * 
 	 */
 	private synchronized void init() {
-            //BM: da rivedere - forse è a posto così
 		result = "no";
 		time = 0;
                 step = 0;
@@ -68,14 +65,14 @@ public class MonitorModel extends ClipsModel {
 		}
 	}
         
-        //ATTENZIONE: questo metodo aggiorna la mappa ogni volta che si esegue un'azione, questo perché nella loro versione il mondo era dinamico,
-        //da noi la mappa è statica!
+        //ATTENZIONE: questo metodo aggiorna la mappa ogni volta che si esegue un'azione,
+        // questo perché nella loro versione il mondo era dinamico,
+        // da noi la mappa è statica!
 	/**Aggiorna la mappa leggendola dal file clips
 	 * 
 	 * @throws ClipsException 
 	 */
 	private synchronized void updateMap() throws ClipsException {
-            //BM: da rivedere
 		System.out.println("AGGIORNAMENTO MAPPA IN CORSO...");
 		String[] array = {"pos-r", "pos-c", "type", "actual"};
 		String[][] mp;
@@ -83,7 +80,7 @@ public class MonitorModel extends ClipsModel {
 		for (int i = 0; i < mp.length; i++) {
 			int r = new Integer(mp[i][0]);
 			int c = new Integer(mp[i][1]);
-                        //BM: qua supertrick per la sovrapposizione di type e actual
+                        //BM: agggiunto underscore per la sovrapposizione dei tag di type e actual
 			map[r - 1][c - 1] = mp[i][2] + "_" + mp[i][3];
 		}
 		System.out.println("...RIEMPITA BASE...");
@@ -101,7 +98,8 @@ public class MonitorModel extends ClipsModel {
                         String background = map[r - 1][c - 1];
 			map[r - 1][c - 1] = "robot_" + background;
 		}
-                //nel vecchio progetto ogni azione costava una unità di tempo, nel vecchio progetto veniva stampato il nostro equivalente step -> debuggare questa parte!!
+                //nel vecchio progetto ogni azione costava una unità di tempo;
+                //nel vecchio progetto veniva stampato il nostro equivalente step
                 System.out.println("...AGGIORNATO LO STATO DEL ROBOT...");
 		String[] arrayStatus = {"step", "time", "result"};
 		String[] status = core.findFact("MAIN", "status", "TRUE", arrayStatus);
