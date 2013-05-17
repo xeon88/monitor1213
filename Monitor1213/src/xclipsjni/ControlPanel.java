@@ -14,6 +14,7 @@ import javax.swing.filechooser.FileFilter;
  * oppure può essere usato come finestra a se stante semplicemente attraverso il costruttore.
  *
  * @author Piovesan Luca, Verdoja Francesco
+ * Edited by: @author  Violanti Luca, Varesano Marco, Busso Marco, Cotrino Roberto
  */
 class ControlPanel extends JFrame implements Observer {
 

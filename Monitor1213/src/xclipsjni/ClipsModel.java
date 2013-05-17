@@ -8,6 +8,7 @@ import java.util.Observable;
  * Estendendo Observable qualunque view che voglia essere aggiornata con i cambiamenti del model deve implementare Observer.
  *
  * @author Piovesan Luca, Verdoja Francesco
+ * Edited by: @author  Violanti Luca, Varesano Marco, Busso Marco, Cotrino Roberto
  */
 public abstract class ClipsModel extends Observable implements Runnable {
 

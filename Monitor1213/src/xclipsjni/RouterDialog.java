@@ -9,6 +9,7 @@ import CLIPSJNI.Router;
 /**
  *
  * @author piovel
+ * Edited by: @author  Violanti Luca, Varesano Marco, Busso Marco, Cotrino Roberto
  */
 class RouterDialog extends Router {
 

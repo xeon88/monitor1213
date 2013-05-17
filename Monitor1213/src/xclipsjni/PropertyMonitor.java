@@ -5,6 +5,7 @@ package xclipsjni;
  * ma alla necessità può essere usata anche per altro.
  *
  * @author Piovesan Luca, Verdoja Francesco
+ * Edited by: @author  Violanti Luca, Varesano Marco, Busso Marco, Cotrino Roberto
  */
 public class PropertyMonitor extends javax.swing.JFrame {
 
