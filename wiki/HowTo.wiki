@@ -8,7 +8,7 @@ Il progetto è stato sviluppato e testato *solo* su piattaforma Windows 7 x64, p
 =Istruzioni=
 
 Recuperare il file corrispondente alla versione del sistema operativo utilizzato:
-  * _caso x64_:[https://code.google.com/p/monitor1213/source/browse/trunk/Monitor1213/libs/CLIPSJNI.dll CLIPSJNI.dll x64]
+  * _caso x64_:[http://www.di.unito.it/~piovesan/CLIPSJNI%2064-bit.zip x64]
   * _caso x86_:[https://code.google.com/p/xclipsjni/source/browse/trunk/XCLIPSJNI/CLIPSJNI/CLIPSJNI.dll CLIPSJNI.dll x86]
 
 e copiarlo nella cartella C:\Windows\System32.
