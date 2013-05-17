@@ -11,4 +11,4 @@ Recuperare il file corrispondente alla versione del sistema operativo utilizzato
 
 e copiarlo nella cartella C:\Windows\System32.
 [Se è stato modificato il java.library.path, si può recuperarlo con il metodo:
-{{{System.getProperty("java.library.path");}}}
+{{{	System.getProperty("java.library.path");}}}
