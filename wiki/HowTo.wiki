@@ -5,7 +5,7 @@ Il progetto è stato sviluppato e testato *solo* su piattaforma Windows 7 x64, p
 ===Versione di Netbeans consigliata===
 [http://www.oracle.com/technetwork/java/javase/downloads/jdk-7-netbeans-download-432126.html Netbeans + JDK]
 
-==Istruzioni==
+=Istruzioni=
 
 Recuperare il file corrispondente alla versione del sistema operativo utilizzato:
   * _caso x64_:[https://code.google.com/p/monitor1213/source/browse/trunk/Monitor1213/libs/CLIPSJNI.dll CLIPSJNI.dll x64]
