@@ -3,6 +3,7 @@ package xclipsjni;
 /**Questa classe implementa un'eccezione specifica per le eccezioni lanciate dall'ambiente di clips.
  *
  * @author Poivesan Luca, Verdoja Francesco
+ * Edited by: @author  Violanti Luca, Varesano Marco, Busso Marco, Cotrino Roberto
  */
 public class ClipsException extends Exception {
 

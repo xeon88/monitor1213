@@ -10,6 +10,7 @@ import javax.swing.JPanel;
  * dell'interfaccia grafica specifica per ogni progetto.
  *
  * @author Piovesan Luca, Verdoja Francesco
+ * Edited by: @author  Violanti Luca, Varesano Marco, Busso Marco, Cotrino Roberto
  */
 public abstract class ClipsView implements Observer {
 

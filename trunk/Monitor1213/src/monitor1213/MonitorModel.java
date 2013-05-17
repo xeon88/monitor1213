@@ -4,7 +4,7 @@ import xclipsjni.ClipsException;
 
 /**L'implementazione della classe ClipsModel specifica per il progetto Monitor 2012/2013.
  *
- * @author Violanti Luca
+ * @author Violanti Luca, Varesano Marco, Busso Marco, Cotrino Roberto
  */
 public class MonitorModel extends ClipsModel {
 

@@ -8,6 +8,7 @@ import java.util.StringTokenizer;
  * ClipsJNI, che usa per interfacciarsi a clips.
  *
  * @author Piovesan Luca, Verdoja Francesco
+ * Edited by: @author  Violanti Luca, Varesano Marco, Busso Marco, Cotrino Roberto
  */
 public class ClipsCore {
 

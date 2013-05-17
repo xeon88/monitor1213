@@ -26,7 +26,7 @@ import xclipsjni.ClipsView;
  * L'implementazione della classe ClipsView specifica per il progetto Monitor
  * 2012/2013
  *
- * @author Violanti Luca
+ * @author Violanti Luca, Varesano Marco, Busso Marco, Cotrino Roberto
  */
 public class MonitorView extends ClipsView implements Observer {
 
