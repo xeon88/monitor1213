@@ -11,7 +11,9 @@ Recuperare il file corrispondente alla versione del sistema operativo utilizzato
   * _caso x64_:[http://www.di.unito.it/~piovesan/CLIPSJNI%2064-bit.zip CLIPSJNI.dll x64]
   * _caso x86_: visitare la pagina [https://code.google.com/p/xclipsjni/source/browse/#svn%2Ftrunk%2FXCLIPSJNI%2FCLIPSJNI CLIPSJNI.dll x86], cercare il file "CLIPSJNI.dll", Salva come...
 
-e copiarlo nella cartella C:\Windows\System32.
-[Se è stato modificato il java.library.path, si può recuperarlo con il metodo: {{{System.getProperty("java.library.path");}}}]
+e copiarlo nella cartella nel java.library.path (di default è C:\Windows\System32).
+
+Se è stato modificato il java.library.path, si può recuperarlo con il metodo:
+{{{System.getProperty("java.library.path");}}}
 
 A questo punto è possibile effettuare checkout della versione corrente del progetto da NetBeans.
