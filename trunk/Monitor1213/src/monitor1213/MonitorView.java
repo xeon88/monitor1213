@@ -32,6 +32,7 @@ public class MonitorView extends ClipsView implements Observer {
 
     private MonitorModel model;
     private JFrame view;
+    private JPanel mapPanelContainer;
     private JPanel mapPanel;
     private JLabel[][] map;
     private JTextArea messageArea;
@@ -112,7 +113,7 @@ public class MonitorView extends ClipsView implements Observer {
         int y = mapString[0].length;        
         map = new JLabel[x][y];
         int cellDimension = Math.round(MAP_DIMENSION / x);
-
+        
         messageArea = new JTextArea();
         messageArea.setRows(4);
         //rende autoscrollante la textarea dei messaggi
@@ -121,23 +122,13 @@ public class MonitorView extends ClipsView implements Observer {
         JScrollPane scroll = new JScrollPane(messageArea);
         view.add(scroll, BorderLayout.CENTER);
 
+        mapPanelContainer = new JPanel();
         mapPanel = new JPanel();
         mapPanel.setLayout(new GridLayout(x, y));
-        view.add(mapPanel, BorderLayout.SOUTH);
+        mapPanelContainer.add(mapPanel, BorderLayout.CENTER);        
 
         for (int i = x - 1; i >= 0; i--) {
             for (int j = 0; j < y; j++) {
-// con questa chiamata non c'è ancora conoscenza dell'agente, perciò inutile!
-//				String direction = "";
-//				String loaded = "";
-//				if (mapString[i][j].equals("robot")) {
-//					direction = model.getDirection();
-//                                        //BM: ricontrollare
-////					if (model.isLoaded()) {
-////						loaded = "Debris";
-////					}
-//				}
-//				ImageIcon icon = new ImageIcon("img" + File.separator + mapString[i][j] + direction + loaded + ".jpg");
                 ImageIcon icon = new ImageIcon("img" + File.separator + mapString[i][j] + "_ok.jpg");
                 Image image = icon.getImage().getScaledInstance(cellDimension, cellDimension, Image.SCALE_SMOOTH);
                 icon = new ImageIcon(image);
@@ -146,6 +137,8 @@ public class MonitorView extends ClipsView implements Observer {
                 mapPanel.add(map[i][j]);
             }
         }
+        view.add(mapPanelContainer, BorderLayout.SOUTH);
+        
         view.pack();
     }
 
