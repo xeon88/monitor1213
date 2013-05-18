@@ -28,7 +28,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="controlPanel" min="-2" pref="375" max="-2" attributes="0"/>
+          <Component id="controlPanel" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -41,10 +41,10 @@
     <Container class="javax.swing.JPanel" name="controlPanel">
       <Properties>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[375, 90]"/>
+          <Dimension value="[450, 90]"/>
         </Property>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[388, 90]"/>
+          <Dimension value="[450, 90]"/>
         </Property>
       </Properties>
 
@@ -54,11 +54,11 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="separator" alignment="0" pref="351" max="32767" attributes="0"/>
+                      <Component id="separator" alignment="0" pref="430" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="loadFileButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="loadFileLabel" pref="108" max="32767" attributes="0"/>
+                          <Component id="loadFileLabel" pref="188" max="32767" attributes="0"/>
                           <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -68,7 +68,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="stepButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="visualizeLabel" pref="58" max="32767" attributes="0"/>
+                          <Component id="visualizeLabel" pref="133" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="visualizeAgendaButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
