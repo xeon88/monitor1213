@@ -138,7 +138,7 @@ public class MonitorView extends ClipsView implements Observer {
 ////					}
 //				}
 //				ImageIcon icon = new ImageIcon("img" + File.separator + mapString[i][j] + direction + loaded + ".jpg");
-                ImageIcon icon = new ImageIcon("img" + File.separator + mapString[i][j] + ".jpg");
+                ImageIcon icon = new ImageIcon("img" + File.separator + mapString[i][j] + "_ok.jpg");
                 Image image = icon.getImage().getScaledInstance(cellDimension, cellDimension, Image.SCALE_SMOOTH);
                 icon = new ImageIcon(image);
                 map[i][j] = new JLabel(icon);
