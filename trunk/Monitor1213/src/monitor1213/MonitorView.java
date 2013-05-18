@@ -37,6 +37,7 @@ public class MonitorView extends ClipsView implements Observer {
     private JLabel[][] map;
     private JTextArea messageArea;
     private final int MAP_DIMENSION = 550;
+    private final int DEFAULT_IMG_SIZE = 85;
 
     /**
      * È il costruttore da chiamare nel main per avviare l'intero sistema, apre
@@ -107,12 +108,16 @@ public class MonitorView extends ClipsView implements Observer {
      *
      */
     private void initializeMap() {
-        //BM: da rivedere
         String[][] mapString = model.getMap();
         int x = mapString.length;
         int y = mapString[0].length;
         map = new JLabel[x][y];
         int cellDimension = Math.round(MAP_DIMENSION / x);
+        
+        // bloccata la dimensione massima delle singole immagini
+        if(cellDimension > DEFAULT_IMG_SIZE) {
+            cellDimension = DEFAULT_IMG_SIZE;
+        }
 
         messageArea = new JTextArea();
         messageArea.setRows(4);
