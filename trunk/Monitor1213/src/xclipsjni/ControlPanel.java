@@ -57,8 +57,8 @@ class ControlPanel extends JFrame implements Observer {
         setMinimumSize(new java.awt.Dimension(375, 100));
         setName("panelFrame"); // NOI18N
 
-        controlPanel.setMinimumSize(new java.awt.Dimension(375, 90));
-        controlPanel.setPreferredSize(new java.awt.Dimension(388, 90));
+        controlPanel.setMinimumSize(new java.awt.Dimension(450, 90));
+        controlPanel.setPreferredSize(new java.awt.Dimension(450, 90));
 
         loadFileButton.setText("Carica Ambiente Clips");
         loadFileButton.addActionListener(new java.awt.event.ActionListener() {
@@ -124,11 +124,11 @@ class ControlPanel extends JFrame implements Observer {
             .addGroup(controlPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(separator, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
+                    .addComponent(separator, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
                     .addGroup(controlPanelLayout.createSequentialGroup()
                         .addComponent(loadFileButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(loadFileLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                        .addComponent(loadFileLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
                         .addGap(103, 103, 103))
                     .addGroup(controlPanelLayout.createSequentialGroup()
                         .addComponent(runButton)
@@ -137,7 +137,7 @@ class ControlPanel extends JFrame implements Observer {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(stepButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(visualizeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+                        .addComponent(visualizeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(visualizeAgendaButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -168,7 +168,7 @@ class ControlPanel extends JFrame implements Observer {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(controlPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(controlPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,7 +200,8 @@ class ControlPanel extends JFrame implements Observer {
 			visualizeAgendaButton.setEnabled(true);
 			visualizeFactsButton.setEnabled(true);
 			model.execute();
-		} else {
+		}
+                else if (returnval != JFileChooser.CANCEL_OPTION && returnval != JFileChooser.ABORT) {
 			throw new IllegalArgumentException("Incorrect file extension");
 		}
 	}//GEN-LAST:event_loadFileButtonActionPerformed
