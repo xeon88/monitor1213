@@ -110,22 +110,22 @@ public class MonitorView extends ClipsView implements Observer {
         //BM: da rivedere
         String[][] mapString = model.getMap();
         int x = mapString.length;
-        int y = mapString[0].length;        
+        int y = mapString[0].length;
         map = new JLabel[x][y];
         int cellDimension = Math.round(MAP_DIMENSION / x);
-        
+
         messageArea = new JTextArea();
         messageArea.setRows(4);
         //rende autoscrollante la textarea dei messaggi
-        DefaultCaret caret = (DefaultCaret)messageArea.getCaret();  
-        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE); 
+        DefaultCaret caret = (DefaultCaret) messageArea.getCaret();
+        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
         JScrollPane scroll = new JScrollPane(messageArea);
         view.add(scroll, BorderLayout.CENTER);
 
         mapPanelContainer = new JPanel();
         mapPanel = new JPanel();
         mapPanel.setLayout(new GridLayout(x, y));
-        mapPanelContainer.add(mapPanel, BorderLayout.CENTER);        
+        mapPanelContainer.add(mapPanel, BorderLayout.CENTER);
 
         for (int i = x - 1; i >= 0; i--) {
             for (int j = 0; j < y; j++) {
@@ -138,7 +138,7 @@ public class MonitorView extends ClipsView implements Observer {
             }
         }
         view.add(mapPanelContainer, BorderLayout.SOUTH);
-        
+
         view.pack();
     }
 
@@ -148,43 +148,39 @@ public class MonitorView extends ClipsView implements Observer {
      *
      */
     private void updateMap() throws IOException {
-        //BM: da rivedere
         String[][] mapString = model.getMap();
         int cellDimension = Math.round(MAP_DIMENSION / map.length);
 
         for (int i = map.length - 1; i >= 0; i--) {
             for (int j = 0; j < map[0].length; j++) {
+                @SuppressWarnings("UnusedAssignment")
                 String direction = "";
                 ImageIcon icon;
                 Image image;
+                BufferedImage background;
+                BufferedImage robot;
+                BufferedImage combined;
+                Graphics g;
 
-                //cerca se, nei primi 6 caratteri (se ce ne sono almeno 6), c'è la stringa "robot_"...
+                // cerca se, nei primi 6 caratteri (se ce ne sono almeno 6), c'è la stringa "robot_"...
                 if (mapString[i][j].length() >= 6 && mapString[i][j].substring(0, 6).equals("robot_")) {
                     direction = model.getDirection();
-
-                    // carico 2 immagini
-                    BufferedImage background;
-                    //...nel, caso prosegue dal 6° carattere in poi.
+                    // ...nel, caso prosegue dal 6° carattere in poi.
                     background = ImageIO.read(new File("img" + File.separator + mapString[i][j].substring(6, mapString[i][j].length()) + ".jpg"));
-                    BufferedImage robot;
                     robot = ImageIO.read(new File("img" + File.separator + "robot_" + direction + ".png"));
 
-                    // creo una nuova immagine, la dimensione è quella più grande tra le 2 img
+                    // crea una nuova immagine, la dimensione è quella più grande tra le 2 img
                     int w = Math.max(background.getWidth(), robot.getWidth());
                     int h = Math.max(background.getHeight(), robot.getHeight());
-                    BufferedImage combined = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+                    combined = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
 
                     // disegna le immagini, preservando i canali alpha per le trasparenze
-                    Graphics g = combined.getGraphics();
+                    g = combined.getGraphics();
                     g.drawImage(background, 0, 0, null);
                     g.drawImage(robot, 0, 0, null);
 
-                    // salvo la nuova immagine (combined verrà sovrascritta ogni volta per non creare troppe immagini nella cartella)
-                    //ImageIO.write(combined, "PNG", new File("img" + File.separator + "combined.png"));
-
                     icon = new ImageIcon(combined);
-                }
-                else {
+                } else {
                     icon = new ImageIcon("img" + File.separator + mapString[i][j] + ".jpg");
                 }
                 image = icon.getImage().getScaledInstance(cellDimension, cellDimension, Image.SCALE_SMOOTH);
