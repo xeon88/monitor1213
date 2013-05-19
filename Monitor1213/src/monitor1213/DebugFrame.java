@@ -41,7 +41,7 @@ public class DebugFrame extends JDialog {
 		this.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent arg0) {
-				System.exit(32);
+				//System.exit(32);
 			}
 		});
 		this.repaint();
