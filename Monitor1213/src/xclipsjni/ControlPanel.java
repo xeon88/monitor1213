@@ -7,6 +7,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileFilter;
+import monitor1213.DebugFrame;
 
 /**Questa classe implementa il pannello di controllo di clips, questo modulo consente di svolgere tutte le azioni più utili,
  * fra cui: caricamento di un file clips, run, run(1) e run di un turno, visualizzazione agenda e visualizzazione fatti.
@@ -293,7 +294,8 @@ class ControlPanel extends JFrame implements Observer {
 				visualizeFactsButton.setSelected(false);
 			}
 		} catch (Exception ex) {
-			System.out.println("[ERRORE] " + ex.toString());
+			//System.out.println("[ERRORE] " + ex.toString());
+                        DebugFrame.append("[ERRORE] " + ex.toString());
 		}
 	}
 

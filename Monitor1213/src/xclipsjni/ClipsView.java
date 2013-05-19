@@ -3,6 +3,7 @@ package xclipsjni;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JPanel;
+import monitor1213.DebugFrame;
 
 /**Questa classe astratta è la parte di view (in un'architettura MVC) e implementa Observer,
  * per osservare il model (i.e. ClipsModel).
@@ -30,7 +31,8 @@ public abstract class ClipsView implements Observer {
 		} else if (advice.equals("disposeDone")) {
 			onDispose();
 		} else {
-			System.out.println("ECCEZIONE: " + advice);
+			//System.out.println("ECCEZIONE: " + advice);
+                        DebugFrame.append("ECCEZIONE: " + advice);
 		}
 	}
 

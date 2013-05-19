@@ -1,6 +1,7 @@
 package xclipsjni;
 
 import java.util.Observable;
+import monitor1213.DebugFrame;
 
 /**Questa classe astratta è la parte di model (in un'architettura MVC) che si interfaccia e mantiene con i dati.
  * Nella fattispecie, le implentazioni di questa classe dovranno mantenere copie
@@ -93,7 +94,8 @@ public abstract class ClipsModel extends Observable implements Runnable {
 	 */
 	public void startCore(String path) {
 		core = new ClipsCore(path);
-		System.out.println("[Clips Environment created and ready to run]");
+		//System.out.println("[Clips Environment created and ready to run]");
+                DebugFrame.append("[Clips Environment created and ready to run]");
 	}
 
 	/**Equivalente alla funzione facts di Clips.

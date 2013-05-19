@@ -20,7 +20,7 @@ public class MonitorModel extends ClipsModel {
     private String result;
     private String communications;
     private int score;
-    private static final boolean DEBUG = true;
+    public static final boolean DEBUG = true;
 
     /**
      * Costruttore del modello per il progetto Monitor
@@ -35,14 +35,17 @@ public class MonitorModel extends ClipsModel {
      *
      */
     private synchronized void init() {
+        DebugFrame.theOnly().setVisible(true);
         result = "no";
         time = 0;
         step = 0;
         maxduration = Integer.MAX_VALUE;
         try {
-            System.out.println("RICERCA DEI PARAMETRI DI FINE IN CORSO...");
+            //System.out.println("RICERCA DEI PARAMETRI DI FINE IN CORSO...");
+            DebugFrame.append("RICERCA DEI PARAMETRI DI FINE IN CORSO...");
             maxduration = new Integer(core.findOrderedFact("MAIN", "maxduration"));
-            System.out.println("INIZIALIZZAZIONE DELLA MAPPA IN CORSO...");
+            //System.out.println("INIZIALIZZAZIONE DELLA MAPPA IN CORSO...");
+            DebugFrame.append("INIZIALIZZAZIONE DELLA MAPPA IN CORSO...");
             String[] array = {"pos-r", "pos-c", "type"};
             String[][] mp = core.findAllFacts("MAIN", "prior_cell", "TRUE", array);
             int maxr = 0;
@@ -63,10 +66,14 @@ public class MonitorModel extends ClipsModel {
                 int c = new Integer(mp[i][1]);
                 map[r - 1][c - 1] = mp[i][2];
             }
-            System.out.println("INIZIALIZZATA LA MAPPA");
+            //System.out.println("INIZIALIZZATA LA MAPPA");
+            DebugFrame.append("INIZIALIZZATA LA MAPPA");
+            
         } catch (ClipsException ex) {
-            System.out.println("SI E' VERIFICATO UN ERRORE DURANTE L'INIZIALIZZAZIONE: ");
-            System.out.println(ex.toString());
+            //System.out.println("SI E' VERIFICATO UN ERRORE DURANTE L'INIZIALIZZAZIONE: ");
+            DebugFrame.append("SI E' VERIFICATO UN ERRORE DURANTE L'INIZIALIZZAZIONE: ");
+            //System.out.println(ex.toString());
+            DebugFrame.append(ex.toString());
         }
     }
 
@@ -79,7 +86,8 @@ public class MonitorModel extends ClipsModel {
      * @throws ClipsException
      */
     private synchronized void updateMap() throws ClipsException {
-        System.out.println("AGGIORNAMENTO MAPPA IN CORSO...");
+        //System.out.println("AGGIORNAMENTO MAPPA IN CORSO...");
+        DebugFrame.append("AGGIORNAMENTO MAPPA IN CORSO...");
         String[] array = {"pos-r", "pos-c", "type", "actual"};
         String[][] mp;
         mp = core.findAllFacts("ENV", "actual_cell", "TRUE", array);
@@ -89,7 +97,8 @@ public class MonitorModel extends ClipsModel {
             // agggiunto underscore per la sovrapposizione dei tag di type e actual
             map[r - 1][c - 1] = mp[i][2] + "_" + mp[i][3];
         }
-        System.out.println("...RIEMPITA BASE...");
+        //System.out.println("...RIEMPITA BASE...");
+        DebugFrame.append("...RIEMPITA BASE...");
         String[] arrayRobot = {"pos-r", "pos-c", "direction", "dur-last-act", "time", "step"};
         String[] robot = core.findFact("ENV", "agentstatus", "TRUE", arrayRobot);
         if (robot[0] != null) {
@@ -104,16 +113,19 @@ public class MonitorModel extends ClipsModel {
         }
         //nel vecchio progetto ogni azione costava una unità di tempo;
         //nel vecchio progetto veniva stampato l'equivalente del nostro step
-        System.out.println("...AGGIORNATO LO STATO DEL ROBOT...");
+        //System.out.println("...AGGIORNATO LO STATO DEL ROBOT...");
+        DebugFrame.append("...AGGIORNATO LO STATO DEL ROBOT...");
         String[] arrayStatus = {"step", "time", "result"};
         String[] status = core.findFact("MAIN", "status", "TRUE", arrayStatus);
         if (status[0] != null) {
             step = new Integer(status[0]);
             time = new Integer(status[1]);
             result = status[2];
-            System.out.println("STEP: " + step + " TIME: " + time + " RESULT: " + result);
+            //System.out.println("STEP: " + step + " TIME: " + time + " RESULT: " + result);
+            DebugFrame.append("STEP: " + step + " TIME: " + time + " RESULT: " + result);
         }
-        System.out.println("...AGGIORNATO LO STATUS...");
+        //System.out.println("...AGGIORNATO LO STATUS...");
+        DebugFrame.append("...AGGIORNATO LO STATUS...");
         String[] arrayExec = {"action", "param1", "param2", "param3"};
         String[] exec = core.findFact("MAIN", "exec", "= ?f:step " + step, arrayExec);
         // N.B.: la stampa di "inform..." è effettuata prima di eseguire
@@ -124,12 +136,15 @@ public class MonitorModel extends ClipsModel {
             communications = null;
         }
 
-        if (DEBUG) {
-            System.out.println("Da eseguire: " + exec[0]);
-        }
+//        if (DEBUG) {
+//            System.out.println("Da eseguire: " + exec[0]);
+//        }
+        DebugFrame.append("Da eseguire: " + exec[0]);
 
-        System.out.println("...AGGIORNATE LE COMUNICAZIONI...");
-        System.out.println("AGGIORNAMENTO COMPLETATO");
+//        System.out.println("...AGGIORNATE LE COMUNICAZIONI...");
+//        System.out.println("AGGIORNAMENTO COMPLETATO");
+        DebugFrame.append("...AGGIORNATE LE COMUNICAZIONI...");
+        DebugFrame.append("AGGIORNAMENTO COMPLETATO");
     }
 
     /**
