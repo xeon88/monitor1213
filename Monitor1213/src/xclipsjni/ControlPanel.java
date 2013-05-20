@@ -1,5 +1,7 @@
 package xclipsjni;
 
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.File;
 import java.util.Observable;
 import java.util.Observer;
@@ -31,9 +33,67 @@ class ControlPanel extends JFrame implements Observer {
 		initComponents();
 		this.model = model;
 		agendaMonitor = new PropertyMonitor("Agenda");
+                agendaMonitor.setLocation(625, 0);
 		factsMonitor = new PropertyMonitor("Fatti");
+                factsMonitor.setLocation(975,0);
 		this.model.addObserver((Observer) this);
-	}
+                agendaMonitor.addWindowListener(new WindowListener()
+                {
+                    @Override
+                    public void windowClosing(WindowEvent e)
+                    {
+                        visualizeAgendaButton.setSelected(false);
+                    }
+
+                    @Override
+                    public void windowOpened(WindowEvent e) {
+                        visualizeAgendaButton.setSelected(true);
+                    }
+
+                    @Override
+                    public void windowClosed(WindowEvent e) {}
+
+                    @Override
+                    public void windowIconified(WindowEvent e) {}
+
+                    @Override
+                    public void windowDeiconified(WindowEvent e) {}
+
+                    @Override
+                    public void windowActivated(WindowEvent e) {}
+
+                    @Override
+                    public void windowDeactivated(WindowEvent e) {}
+                });
+                factsMonitor.addWindowListener(new WindowListener()
+                {
+                    @Override
+                    public void windowClosing(WindowEvent e)
+                    {
+                        visualizeFactsButton.setSelected(false);
+                    }
+
+                    @Override
+                    public void windowOpened(WindowEvent e) {
+                        visualizeFactsButton.setSelected(true);
+                    }
+
+                    @Override
+                    public void windowClosed(WindowEvent e) {}
+
+                    @Override
+                    public void windowIconified(WindowEvent e) {}
+
+                    @Override
+                    public void windowDeiconified(WindowEvent e) {}
+
+                    @Override
+                    public void windowActivated(WindowEvent e) {}
+
+                    @Override
+                    public void windowDeactivated(WindowEvent e) {}
+                });
+         }
 
 	/** Questo metodo è chiamato dal costruttore e inizializza il form
 	 * WARNING: NON modificare assolutamente questo metodo.
