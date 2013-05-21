@@ -1,5 +1,7 @@
 package xclipsjni;
 
+import javax.swing.text.DefaultCaret;
+
 /**Questa classe implementa una finestrella di piccole dimensioni contenente una TextArea nella quale si può inserire del testo.
  * È usata all'interno del pannello di controllo per le finestre di Agenda e Fatti,
  * ma alla necessità può essere usata anche per altro.
@@ -83,6 +85,11 @@ public class PropertyMonitor extends javax.swing.JFrame {
 	void appendText(String text) {
 		textArea.append(text);
 	}
+        
+        void setAutoScroll() {
+            DefaultCaret caret = (DefaultCaret)this.textArea.getCaret();
+            caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+        }
    // Variables declaration - do not modify//GEN-BEGIN:variables
    private javax.swing.JScrollPane scrollPane;
    private javax.swing.JTextArea textArea;
