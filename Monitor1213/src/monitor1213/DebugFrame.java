@@ -131,7 +131,6 @@ public class DebugFrame extends JDialog {
 //      }
 
         public static void append(Object s) {
-                if (true) {
 //                      try {
 //                              fos.write((s.toString() + System.getProperty("line.separator")).getBytes());
 //                      } catch (IOException ex) {
@@ -141,7 +140,6 @@ public class DebugFrame extends JDialog {
                         theOnly().getjTextArea().selectAll();
                         int x = theOnly().getjTextArea().getSelectionEnd();
                         theOnly().getjTextArea().select(x, x);
-                }
         }
 
 
