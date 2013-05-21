@@ -20,7 +20,6 @@ public class MonitorModel extends ClipsModel {
     private String result;
     private String communications;
     private int score;
-    public static final boolean DEBUG = true;
 
     /**
      * Costruttore del modello per il progetto Monitor
@@ -35,7 +34,6 @@ public class MonitorModel extends ClipsModel {
      *
      */
     private synchronized void init() {
-        DebugFrame.theOnly().setVisible(true);
         result = "no";
         time = 0;
         step = 0;

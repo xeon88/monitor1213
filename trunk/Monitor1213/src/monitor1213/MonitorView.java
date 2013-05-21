@@ -22,6 +22,7 @@ import javax.swing.JTextArea;
 import javax.swing.text.DefaultCaret;
 import xclipsjni.ClipsView;
 
+
 /**
  * L'implementazione della classe ClipsView specifica per il progetto Monitor
  * 2012/2013

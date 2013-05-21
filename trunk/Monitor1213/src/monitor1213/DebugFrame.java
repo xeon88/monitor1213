@@ -12,132 +12,174 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 /**
- * 
+ *
  * @author Minetti Alberto
+ */
+
+/*
+ * 
+                Dimension debugMonitorDim = new Dimension(600, 200);
+                 debugMonitor = new PropertyMonitor("Debug");
+                debugMonitor.setSize(propertyMonitorDim);
+                debugMonitor.setLocation(screenDim.width - debugMonitor.getWidth(), screenDim.height - debugMonitor.getHeight() - 40);
+                debugMonitor.setAutoScroll();
+                debugMonitor.setVisible(true);
+                debugMonitor.setAlwaysOnTop(true);
+                * 
+                * 
+                *                 debugMonitor.addWindowListener(new WindowListener()
+                {
+                    @Override
+                    public void windowClosing(WindowEvent e)
+                    {
+                        //visualizeDebugButton.setSelected(false);
+                    }
+
+                    @Override
+                    public void windowOpened(WindowEvent e) {
+                        //visualizeDebugButton.setSelected(true);
+                    }
+
+                    @Override
+                    public void windowClosed(WindowEvent e) {}
+
+                    @Override
+                    public void windowIconified(WindowEvent e) {}
+
+                    @Override
+                    public void windowDeiconified(WindowEvent e) {}
+
+                    @Override
+                    public void windowActivated(WindowEvent e) {}
+
+                    @Override
+                    public void windowDeactivated(WindowEvent e) {}
+                });
  */
 public class DebugFrame extends JDialog {
 
-	private static final long serialVersionUID = -4026165797297769412L;
-	private static DebugFrame df;
-	private JPanel jContentPane = null;
-	private JTextArea jTextArea = null;
-	private JScrollPane jScrollPane = null;
+        private static final long serialVersionUID = -4026165797297769412L;
+        private static DebugFrame df;
+        private JPanel jContentPane = null;
+        private JTextArea jTextArea = null;
+        private JScrollPane jScrollPane = null;
 
-	private DebugFrame() {
-		super(null, "Debug Frame", ModalityType.MODELESS);
-		initialize();
-	}
-
-
-	private void initialize() {
-		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-		this.setSize(600, 200);
-		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		this.setLocation(dim.width - this.getWidth(), dim.height - this.getHeight() - 40);
-		this.setContentPane(getJContentPane());
-		this.setTitle("Debug Frame");
-		this.setUndecorated(true);
-		this.getRootPane().setWindowDecorationStyle(JRootPane.ERROR_DIALOG);
-		this.addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent arg0) {
-				//System.exit(32);
-			}
-		});
-		this.repaint();
-		this.setVisible(true);
-	}
+        private DebugFrame() {
+                super(null, "Debug Frame", ModalityType.MODELESS);
+                initialize();
+        }
 
 
-	private JPanel getJContentPane() {
-		if (jContentPane == null) {
-			jContentPane = new JPanel();
-			jContentPane.setLayout(new BorderLayout());
-			jContentPane.add(getJScrollPane(), BorderLayout.CENTER); // Generated
-		}
-		return jContentPane;
-	}
+        private void initialize() {
+                this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+                this.setSize(600, 200);
+                Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+                this.setLocation(dim.width - this.getWidth(), dim.height - this.getHeight() - 40);
+                this.setContentPane(getJContentPane());
+                this.setTitle("Debug Frame");
+                this.setUndecorated(true);
+                this.getRootPane().setWindowDecorationStyle(JRootPane.ERROR_DIALOG);
+                this.addWindowListener(new WindowAdapter() {
+                        @Override
+                        public void windowClosing(WindowEvent arg0) {
+                                //System.exit(32);
+                        }
+                });
+                this.repaint();
+                this.setVisible(true);
+        }
 
 
-	private JTextArea getjTextArea() {
-		if (jTextArea == null) {
-			jTextArea = new JTextArea();
-			jTextArea.setAutoscrolls(false);
-		}
-		return jTextArea;
-	}
+        private JPanel getJContentPane() {
+                if (jContentPane == null) {
+                        jContentPane = new JPanel();
+                        jContentPane.setLayout(new BorderLayout());
+                        jContentPane.add(getJScrollPane(), BorderLayout.CENTER); // Generated
+                }
+                return jContentPane;
+        }
 
-	public static DebugFrame theOnly() {
-		if (df == null) df = new DebugFrame();
-		return df;
-	}
 
-//	private static FileOutputStream fos; //  @jve:decl-index=0:
+        private JTextArea getjTextArea() {
+                if (jTextArea == null) {
+                        jTextArea = new JTextArea();
+                        jTextArea.setAutoscrolls(false);
+                }
+                return jTextArea;
+        }
+
+        public static DebugFrame theOnly() {
+                if (df == null) df = new DebugFrame();
+                return df;
+        }
+
+//      private static FileOutputStream fos; //  @jve:decl-index=0:
 //
-//	static {
-//		if (MonitorModel.DEBUG) {
-//			try {
-//				fos = new FileOutputStream(Path.LOGFILE, false);
-//				fos.write(("DebugMode ON" + System.getProperty("line.separator")).getBytes());
-//				fos = new FileOutputStream(Path.LOGFILE, true);
+//      static {
+//              if (MonitorModel.DEBUG) {
+//                      try {
+//                              fos = new FileOutputStream(Path.LOGFILE, false);
+//                              fos.write(("DebugMode ON" + System.getProperty("line.separator")).getBytes());
+//                              fos = new FileOutputStream(Path.LOGFILE, true);
 //
-//			} catch (FileNotFoundException ex) {
-//				ex.printStackTrace();
-//			} catch (IOException ex) {
-//				ex.printStackTrace();
-//			}
-//		}
-//	}
+//                      } catch (FileNotFoundException ex) {
+//                              ex.printStackTrace();
+//                      } catch (IOException ex) {
+//                              ex.printStackTrace();
+//                      }
+//              }
+//      }
 
-	public static void append(Object s) {
-		if (MonitorModel.DEBUG) {
-//			try {
-//				fos.write((s.toString() + System.getProperty("line.separator")).getBytes());
-//			} catch (IOException ex) {
-//				ex.printStackTrace();
-//			}
-			theOnly().getjTextArea().append(s.toString() + System.getProperty("line.separator"));
-			theOnly().getjTextArea().selectAll();
-			int x = theOnly().getjTextArea().getSelectionEnd();
-			theOnly().getjTextArea().select(x, x);
-		}
-	}
+        public static void append(Object s) {
+                if (true) {
+//                      try {
+//                              fos.write((s.toString() + System.getProperty("line.separator")).getBytes());
+//                      } catch (IOException ex) {
+//                              ex.printStackTrace();
+//                      }
+                        theOnly().getjTextArea().append(s.toString() + System.getProperty("line.separator"));
+                        theOnly().getjTextArea().selectAll();
+                        int x = theOnly().getjTextArea().getSelectionEnd();
+                        theOnly().getjTextArea().select(x, x);
+                }
+        }
 
 
-	private JScrollPane getJScrollPane() {
-		if (jScrollPane == null) {
-			jScrollPane = new JScrollPane();
-			jScrollPane.setViewportView(getjTextArea()); // Generated
+        private JScrollPane getJScrollPane() {
+                if (jScrollPane == null) {
+                        jScrollPane = new JScrollPane();
+                        jScrollPane.setViewportView(getjTextArea()); // Generated
 
-		}
-		return jScrollPane;
-	}
+                }
+                return jScrollPane;
+        }
 
-//	public static void main(String[] a) {
-//		DebugFrame.append("ssdada");
-//		DebugFrame.append("ssdada");
-//		DebugFrame.append("ssdada");
-//		DebugFrame.append("ssdada");
-//		DebugFrame.append("ssdada");
-//		DebugFrame.append("ssdada");
-//		DebugFrame.append("ssdada");
-//		DebugFrame.append("ssdada");
-//		DebugFrame.append("ssdada");
-//		DebugFrame.append("ssdada");
-//		DebugFrame.append("ssdada");
-//		DebugFrame.append("ssdada");
-//		DebugFrame.append("ssdada");
-//		DebugFrame.append("ssdada");
-//		DebugFrame.append("ssdada");
-//		DebugFrame.append("ssdada");
-//		DebugFrame.append("ssdada");
-//		DebugFrame.append("ssdada");
-//		DebugFrame.append("ssdada");
-//		DebugFrame.append("ssdada");
-//		DebugFrame.append("ssdada");
-//		DebugFrame.append("ssdada");
+//      public static void main(String[] a) {
+//              DebugFrame.append("ssdada");
+//              DebugFrame.append("ssdada");
+//              DebugFrame.append("ssdada");
+//              DebugFrame.append("ssdada");
+//              DebugFrame.append("ssdada");
+//              DebugFrame.append("ssdada");
+//              DebugFrame.append("ssdada");
+//              DebugFrame.append("ssdada");
+//              DebugFrame.append("ssdada");
+//              DebugFrame.append("ssdada");
+//              DebugFrame.append("ssdada");
+//              DebugFrame.append("ssdada");
+//              DebugFrame.append("ssdada");
+//              DebugFrame.append("ssdada");
+//              DebugFrame.append("ssdada");
+//              DebugFrame.append("ssdada");
+//              DebugFrame.append("ssdada");
+//              DebugFrame.append("ssdada");
+//              DebugFrame.append("ssdada");
+//              DebugFrame.append("ssdada");
+//              DebugFrame.append("ssdada");
+//              DebugFrame.append("ssdada");
 //
-//		DebugFrame.theOnly().setVisible(true);
-//	}
+//              DebugFrame.theOnly().setVisible(true);
+//      }
 
 } //  @jve:decl-index=0:visual-constraint="10,10"
+

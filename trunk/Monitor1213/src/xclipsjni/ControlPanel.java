@@ -1,5 +1,7 @@
 package xclipsjni;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
@@ -24,6 +26,7 @@ class ControlPanel extends JFrame implements Observer {
 	ClipsModel model;
 	PropertyMonitor agendaMonitor;
 	PropertyMonitor factsMonitor;
+        PropertyMonitor debugMonitor;
 
 	/** Crea un nuovo Pannello di controllo per un ambiente clips
 	 * 
@@ -32,10 +35,22 @@ class ControlPanel extends JFrame implements Observer {
 	public ControlPanel(ClipsModel model) {
 		initComponents();
 		this.model = model;
+                Dimension screenDim = Toolkit.getDefaultToolkit().getScreenSize();
+                Dimension propertyMonitorDim = new Dimension(600, 325);
+                
 		agendaMonitor = new PropertyMonitor("Agenda");
-                agendaMonitor.setLocation(625, 0);
+                agendaMonitor.setSize(propertyMonitorDim);
+                //agendaMonitor.setLocation(625, 0);                
+		agendaMonitor.setLocation(screenDim.width - agendaMonitor.getWidth(), 0);
+                
 		factsMonitor = new PropertyMonitor("Fatti");
-                factsMonitor.setLocation(975,0);
+                factsMonitor.setSize(propertyMonitorDim);
+                //factsMonitor.setLocation(975,0);
+                factsMonitor.setLocation(screenDim.width - factsMonitor.getWidth(), agendaMonitor.getHeight());
+                factsMonitor.setAutoScroll();
+                
+
+                
 		this.model.addObserver((Observer) this);
                 agendaMonitor.addWindowListener(new WindowListener()
                 {
@@ -65,6 +80,7 @@ class ControlPanel extends JFrame implements Observer {
                     @Override
                     public void windowDeactivated(WindowEvent e) {}
                 });
+                
                 factsMonitor.addWindowListener(new WindowListener()
                 {
                     @Override
