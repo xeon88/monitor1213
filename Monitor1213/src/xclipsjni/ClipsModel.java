@@ -95,7 +95,7 @@ public abstract class ClipsModel extends Observable implements Runnable {
 	public void startCore(String path) {
 		core = new ClipsCore(path);
 		//System.out.println("[Clips Environment created and ready to run]");
-                DebugFrame.append("[Clips Environment created and ready to run]");
+                DebugFrame.appendText("[Clips Environment created and ready to run]");
 	}
 
 	/**Equivalente alla funzione facts di Clips.

@@ -5,58 +5,20 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JRootPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 /**
- *
+ * @author Violanti Luca, Varesano Marco, Busso Marco, Cotrino Roberto
+ * 
+ * Inspired by:
  * @author Minetti Alberto
  */
 
-/*
- * 
-                Dimension debugMonitorDim = new Dimension(600, 200);
-                 debugMonitor = new PropertyMonitor("Debug");
-                debugMonitor.setSize(propertyMonitorDim);
-                debugMonitor.setLocation(screenDim.width - debugMonitor.getWidth(), screenDim.height - debugMonitor.getHeight() - 40);
-                debugMonitor.setAutoScroll();
-                debugMonitor.setVisible(true);
-                debugMonitor.setAlwaysOnTop(true);
-                * 
-                * 
-                *                 debugMonitor.addWindowListener(new WindowListener()
-                {
-                    @Override
-                    public void windowClosing(WindowEvent e)
-                    {
-                        //visualizeDebugButton.setSelected(false);
-                    }
-
-                    @Override
-                    public void windowOpened(WindowEvent e) {
-                        //visualizeDebugButton.setSelected(true);
-                    }
-
-                    @Override
-                    public void windowClosed(WindowEvent e) {}
-
-                    @Override
-                    public void windowIconified(WindowEvent e) {}
-
-                    @Override
-                    public void windowDeiconified(WindowEvent e) {}
-
-                    @Override
-                    public void windowActivated(WindowEvent e) {}
-
-                    @Override
-                    public void windowDeactivated(WindowEvent e) {}
-                });
- */
-public class DebugFrame extends JDialog {
+public class DebugFrame extends JFrame {
 
         private static final long serialVersionUID = -4026165797297769412L;
         private static DebugFrame df;
@@ -65,11 +27,8 @@ public class DebugFrame extends JDialog {
         private JScrollPane jScrollPane = null;
 
         private DebugFrame() {
-                super(null, "Debug Frame", ModalityType.MODELESS);
                 initialize();
-        }
-
-
+        }        
         private void initialize() {
                 this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
                 this.setSize(600, 200);
@@ -89,7 +48,6 @@ public class DebugFrame extends JDialog {
                 this.setVisible(true);
         }
 
-
         private JPanel getJContentPane() {
                 if (jContentPane == null) {
                         jContentPane = new JPanel();
@@ -98,8 +56,7 @@ public class DebugFrame extends JDialog {
                 }
                 return jContentPane;
         }
-
-
+                
         private JTextArea getjTextArea() {
                 if (jTextArea == null) {
                         jTextArea = new JTextArea();
@@ -108,40 +65,15 @@ public class DebugFrame extends JDialog {
                 return jTextArea;
         }
 
-        public static DebugFrame theOnly() {
-                if (df == null) df = new DebugFrame();
-                return df;
+        public static DebugFrame getDebugFrame() {
+            if (df == null) df = new DebugFrame();
+            return df;
         }
 
-//      private static FileOutputStream fos; //  @jve:decl-index=0:
-//
-//      static {
-//              if (MonitorModel.DEBUG) {
-//                      try {
-//                              fos = new FileOutputStream(Path.LOGFILE, false);
-//                              fos.write(("DebugMode ON" + System.getProperty("line.separator")).getBytes());
-//                              fos = new FileOutputStream(Path.LOGFILE, true);
-//
-//                      } catch (FileNotFoundException ex) {
-//                              ex.printStackTrace();
-//                      } catch (IOException ex) {
-//                              ex.printStackTrace();
-//                      }
-//              }
-//      }
 
-        public static void append(Object s) {
-//                      try {
-//                              fos.write((s.toString() + System.getProperty("line.separator")).getBytes());
-//                      } catch (IOException ex) {
-//                              ex.printStackTrace();
-//                      }
-                        theOnly().getjTextArea().append(s.toString() + System.getProperty("line.separator"));
-                        theOnly().getjTextArea().selectAll();
-                        int x = theOnly().getjTextArea().getSelectionEnd();
-                        theOnly().getjTextArea().select(x, x);
+        public static void appendText(String s) {
+             getDebugFrame().getjTextArea().append(s + "\n");             
         }
-
 
         private JScrollPane getJScrollPane() {
                 if (jScrollPane == null) {
@@ -152,32 +84,5 @@ public class DebugFrame extends JDialog {
                 return jScrollPane;
         }
 
-//      public static void main(String[] a) {
-//              DebugFrame.append("ssdada");
-//              DebugFrame.append("ssdada");
-//              DebugFrame.append("ssdada");
-//              DebugFrame.append("ssdada");
-//              DebugFrame.append("ssdada");
-//              DebugFrame.append("ssdada");
-//              DebugFrame.append("ssdada");
-//              DebugFrame.append("ssdada");
-//              DebugFrame.append("ssdada");
-//              DebugFrame.append("ssdada");
-//              DebugFrame.append("ssdada");
-//              DebugFrame.append("ssdada");
-//              DebugFrame.append("ssdada");
-//              DebugFrame.append("ssdada");
-//              DebugFrame.append("ssdada");
-//              DebugFrame.append("ssdada");
-//              DebugFrame.append("ssdada");
-//              DebugFrame.append("ssdada");
-//              DebugFrame.append("ssdada");
-//              DebugFrame.append("ssdada");
-//              DebugFrame.append("ssdada");
-//              DebugFrame.append("ssdada");
-//
-//              DebugFrame.theOnly().setVisible(true);
-//      }
-
-} //  @jve:decl-index=0:visual-constraint="10,10"
+}
 

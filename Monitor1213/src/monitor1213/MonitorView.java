@@ -54,14 +54,14 @@ public class MonitorView extends ClipsView implements Observer {
     @Override
     protected void onSetup() {
         //System.out.println("setupDone");
-        DebugFrame.append("setupDone");
+        DebugFrame.appendText("setupDone");
         initializeMap();
     }
 
     @Override
     protected void onAction() {
         //System.out.println("actionDone");
-        DebugFrame.append("actionDone");
+        DebugFrame.appendText("actionDone");
         try {
             updateMap();
         } catch (IOException ex) {
@@ -73,7 +73,7 @@ public class MonitorView extends ClipsView implements Observer {
     @Override
     protected void onDispose() {
         //System.out.println("disposeDone");
-        DebugFrame.append("disposeDone");
+        DebugFrame.appendText("disposeDone");
         String result = model.getResult();
         int score = model.getScore();
         @SuppressWarnings("UnusedAssignment")
@@ -199,7 +199,7 @@ public class MonitorView extends ClipsView implements Observer {
             }
         }
         //System.out.println("TURNO > " + model.getStep());
-        DebugFrame.append("TURNO > " + model.getStep());
+        DebugFrame.appendText("TURNO > " + model.getStep());
     }
 
     /**

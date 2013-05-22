@@ -32,7 +32,7 @@ public abstract class ClipsView implements Observer {
 			onDispose();
 		} else {
 			//System.out.println("ECCEZIONE: " + advice);
-                        DebugFrame.append("ECCEZIONE: " + advice);
+                        DebugFrame.appendText("ECCEZIONE: " + advice);
 		}
 	}
 
