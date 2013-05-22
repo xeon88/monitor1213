@@ -371,7 +371,7 @@ class ControlPanel extends JFrame implements Observer {
 			}
 		} catch (Exception ex) {
 			//System.out.println("[ERRORE] " + ex.toString());
-                        DebugFrame.append("[ERRORE] " + ex.toString());
+                        DebugFrame.appendText("[ERRORE] " + ex.toString());
 		}
 	}
 
