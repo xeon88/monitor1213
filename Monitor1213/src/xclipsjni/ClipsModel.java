@@ -88,12 +88,22 @@ public abstract class ClipsModel extends Observable implements Runnable {
 		}
 	}
 
-	/**Avvia l'environment di clips
+	/**Avvia l'environment di clips nel caso di default
 	 * 
-	 * @param path il path al file clips da caricare
 	 */
-	public void startCore(String path) {
-		core = new ClipsCore(path);
+	public void startCore() {
+		core = new ClipsCore();
+		//System.out.println("[Clips Environment created and ready to run]");
+                DebugFrame.appendText("[Clips Environment created and ready to run]");
+	}
+        
+        /**Avvia l'environment di clips nel caso di mappe personalizzate
+	 * 
+	 * @param initialPath il path al file clips contenente la mappa "initial"
+         * @param actualPath il path al file clips contenente la mappa "actual"
+	 */
+        public void startCore(String initialPath, String actualPath) {
+		core = new ClipsCore(initialPath, actualPath);
 		//System.out.println("[Clips Environment created and ready to run]");
                 DebugFrame.appendText("[Clips Environment created and ready to run]");
 	}
