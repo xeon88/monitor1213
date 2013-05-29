@@ -20,12 +20,18 @@ public class ClipsCore {
 	 * @param path il percorso del file da caricare
 	 */
 	public ClipsCore(String path) {
+            if(path.equals("default")) {
 		clips = new Environment();
-		clips.load(path);
+		clips.load("1_main.clp");
+                clips.load("2_initial_map.clp");
+                clips.load("3_env.clp");
+                clips.load("4_actual_map.clp");
+                clips.load("5_agent.clp");
 		String extensionsPath = "extensions" + File.separator + "regolaHalt.clp";
 		clips.load(extensionsPath);
 		router = new RouterDialog("routerCore");
 		clips.addRouter(router);
+            }
 	}
 
 	private void throwException(Exception ex) throws ClipsException {
