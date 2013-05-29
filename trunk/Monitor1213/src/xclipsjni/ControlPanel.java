@@ -5,8 +5,11 @@ import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
+import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -44,13 +47,11 @@ class ControlPanel extends JFrame implements Observer {
         Dimension propertyMonitorDim = new Dimension(600, 325);
 
         agendaMonitor = new PropertyMonitor("Agenda");
-        agendaMonitor.setSize(propertyMonitorDim);
-        //agendaMonitor.setLocation(625, 0);                
+        agendaMonitor.setSize(propertyMonitorDim);          
         agendaMonitor.setLocation(screenDim.width - agendaMonitor.getWidth(), 0);
 
         factsMonitor = new PropertyMonitor("Fatti");
         factsMonitor.setSize(propertyMonitorDim);
-        //factsMonitor.setLocation(975,0);
         factsMonitor.setLocation(screenDim.width - factsMonitor.getWidth(), agendaMonitor.getHeight());
         factsMonitor.setAutoScroll();
 
@@ -139,14 +140,16 @@ class ControlPanel extends JFrame implements Observer {
         visualizeAgendaButton = new javax.swing.JCheckBox();
         visualizeFactsButton = new javax.swing.JCheckBox();
         loadCustomFileButton = new javax.swing.JButton();
+        resetButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pannello di Controllo");
         setMinimumSize(new java.awt.Dimension(375, 100));
         setName("panelFrame"); // NOI18N
 
-        controlPanel.setMinimumSize(new java.awt.Dimension(450, 90));
-        controlPanel.setPreferredSize(new java.awt.Dimension(450, 90));
+        controlPanel.setMinimumSize(new java.awt.Dimension(650, 90));
+        controlPanel.setPreferredSize(new java.awt.Dimension(650, 90));
+        controlPanel.setRequestFocusEnabled(false);
 
         loadDefaultFileButton.setText("Default");
         loadDefaultFileButton.addActionListener(new java.awt.event.ActionListener() {
@@ -157,6 +160,8 @@ class ControlPanel extends JFrame implements Observer {
 
         loadFileLabel.setText("Nessun file caricato");
         loadFileLabel.setEnabled(false);
+
+        separator.setPreferredSize(new java.awt.Dimension(600, 2));
 
         runButton.setText("Run");
         runButton.setToolTipText("Esegue la Run di Clips");
@@ -212,6 +217,15 @@ class ControlPanel extends JFrame implements Observer {
             }
         });
 
+        resetButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        resetButton.setForeground(new java.awt.Color(255, 0, 0));
+        resetButton.setText("RESET");
+        resetButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout controlPanelLayout = new javax.swing.GroupLayout(controlPanel);
         controlPanel.setLayout(controlPanelLayout);
         controlPanelLayout.setHorizontalGroup(
@@ -219,22 +233,24 @@ class ControlPanel extends JFrame implements Observer {
             .addGroup(controlPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(separator, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
+                    .addComponent(separator, javax.swing.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
                     .addGroup(controlPanelLayout.createSequentialGroup()
                         .addComponent(loadDefaultFileButton)
                         .addGap(4, 4, 4)
                         .addComponent(loadCustomFileButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(loadFileLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
-                        .addGap(103, 103, 103))
+                        .addComponent(loadFileLabel)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(controlPanelLayout.createSequentialGroup()
+                        .addComponent(resetButton)
+                        .addGap(18, 18, 18)
                         .addComponent(runButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(runOneButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(stepButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(visualizeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(visualizeLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(visualizeAgendaButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -258,7 +274,8 @@ class ControlPanel extends JFrame implements Observer {
                     .addComponent(stepButton)
                     .addComponent(visualizeFactsButton)
                     .addComponent(visualizeAgendaButton)
-                    .addComponent(visualizeLabel))
+                    .addComponent(visualizeLabel)
+                    .addComponent(resetButton))
                 .addContainerGap())
         );
 
@@ -266,7 +283,7 @@ class ControlPanel extends JFrame implements Observer {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(controlPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(controlPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -276,86 +293,15 @@ class ControlPanel extends JFrame implements Observer {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * azione eseguita quando si preme il bottone per il caricamento del file
-     * clips di default
-     *
-     * @param evt l'evento scatenante l'azione
-     */
-	private void loadDefaultFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadDefaultFileButtonActionPerformed
-            loadDefaultFileButton.setEnabled(false);
-            loadCustomFileButton.setEnabled(false);
-            loadFileLabel.setText("Default");
-            loadFileLabel.setEnabled(true);
-            runButton.setEnabled(true);
-            stepButton.setEnabled(true);
-            runOneButton.setEnabled(true);
-            visualizeLabel.setEnabled(true);
-            visualizeAgendaButton.setEnabled(true);
-            visualizeFactsButton.setEnabled(true);
-            model.startCore();
-            model.execute();
-	}//GEN-LAST:event_loadDefaultFileButtonActionPerformed
-
-    /**
-     * azione eseguita quando si preme il checkbox per la visualizzazione dei
-     * fatti
-     *
-     * @param evt l'evento scatenante l'azione
-     */
-	private void visualizeFactsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visualizeFactsButtonActionPerformed
-            factsMonitor.setVisible(visualizeFactsButton.isSelected());
-	}//GEN-LAST:event_visualizeFactsButtonActionPerformed
-
-    /**
-     * azione eseguita quando si preme il tasto Run
-     *
-     * @param evt l'evento scatenante l'azione
-     */
-	private void runButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runButtonActionPerformed
-            if (runButton.getText().equals("Run")) {
-                model.setMode("RUN");
-                model.resume();
-                runButton.setText("Stop");
-                stepButton.setEnabled(false);
-                runOneButton.setEnabled(false);
-            } else {
-                model.setMode("STEP");
-                runButton.setText("Run");
-                stepButton.setEnabled(true);
-                runOneButton.setEnabled(true);
-            }
-	}//GEN-LAST:event_runButtonActionPerformed
-
-    /**
-     * azione eseguita quando si preme il tasto Step
-     *
-     * @param evt l'evento scatenante l'azione
-     */
-	private void stepButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stepButtonActionPerformed
-            model.setMode("STEP");
-            model.resume();
-	}//GEN-LAST:event_stepButtonActionPerformed
-
-    /**
-     * azione eseguita quando si preme il checkbox per la visualizzazione
-     * dell'agenda
-     *
-     * @param evt l'evento scatenante l'azione
-     */
-	private void visualizeAgendaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visualizeAgendaButtonActionPerformed
-            agendaMonitor.setVisible(visualizeAgendaButton.isSelected());
-	}//GEN-LAST:event_visualizeAgendaButtonActionPerformed
-
-    /**
-     * azione eseguita quando si preme il tasto Run(1)
-     *
-     * @param evt l'evento scatenante l'azione
-     */
-	private void runOneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runOneButtonActionPerformed
-            model.setMode("RUNONE");
-            model.resume();
-	}//GEN-LAST:event_runOneButtonActionPerformed
+    private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
+        try {
+            Runtime runtime = Runtime.getRuntime();
+            runtime.exec("java -jar dist/Monitor1213.jar");
+            runtime.exit(5386);
+        } catch (IOException ex) {
+            Logger.getLogger(ControlPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_resetButtonActionPerformed
 
     /**
      * azione eseguita quando si preme il bottone per il caricamento dei file
@@ -398,11 +344,94 @@ class ControlPanel extends JFrame implements Observer {
             throw new IllegalArgumentException("Incorrect file extension");
         }
     }//GEN-LAST:event_loadCustomFileButtonActionPerformed
+
+    /**
+     * azione eseguita quando si preme il checkbox per la visualizzazione dei
+     * fatti
+     *
+     * @param evt l'evento scatenante l'azione
+     */
+    private void visualizeFactsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visualizeFactsButtonActionPerformed
+        factsMonitor.setVisible(visualizeFactsButton.isSelected());
+    }//GEN-LAST:event_visualizeFactsButtonActionPerformed
+
+    /**
+     * azione eseguita quando si preme il checkbox per la visualizzazione
+     * dell'agenda
+     *
+     * @param evt l'evento scatenante l'azione
+     */
+    private void visualizeAgendaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visualizeAgendaButtonActionPerformed
+        agendaMonitor.setVisible(visualizeAgendaButton.isSelected());
+    }//GEN-LAST:event_visualizeAgendaButtonActionPerformed
+
+    /**
+     * azione eseguita quando si preme il tasto Run(1)
+     *
+     * @param evt l'evento scatenante l'azione
+     */
+    private void runOneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runOneButtonActionPerformed
+        model.setMode("RUNONE");
+        model.resume();
+    }//GEN-LAST:event_runOneButtonActionPerformed
+
+    /**
+     * azione eseguita quando si preme il tasto Step
+     *
+     * @param evt l'evento scatenante l'azione
+     */
+    private void stepButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stepButtonActionPerformed
+        model.setMode("STEP");
+        model.resume();
+    }//GEN-LAST:event_stepButtonActionPerformed
+
+    /**
+     * azione eseguita quando si preme il tasto Run
+     *
+     * @param evt l'evento scatenante l'azione
+     */
+    private void runButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runButtonActionPerformed
+        if (runButton.getText().equals("Run")) {
+            model.setMode("RUN");
+            model.resume();
+            runButton.setText("Stop");
+            stepButton.setEnabled(false);
+            runOneButton.setEnabled(false);
+        } else {
+            model.setMode("STEP");
+            runButton.setText("Run");
+            stepButton.setEnabled(true);
+            runOneButton.setEnabled(true);
+        }
+    }//GEN-LAST:event_runButtonActionPerformed
+
+    /**
+     * azione eseguita quando si preme il bottone per il caricamento del file
+     * clips di default
+     *
+     * @param evt l'evento scatenante l'azione
+     */
+    private void loadDefaultFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadDefaultFileButtonActionPerformed
+        loadDefaultFileButton.setEnabled(false);
+        loadCustomFileButton.setEnabled(false);
+        loadFileLabel.setText("Default");
+        loadFileLabel.setEnabled(true);
+        runButton.setEnabled(true);
+        stepButton.setEnabled(true);
+        runOneButton.setEnabled(true);
+        visualizeLabel.setEnabled(true);
+        visualizeAgendaButton.setEnabled(true);
+        visualizeFactsButton.setEnabled(true);
+        model.startCore();
+        model.execute();
+    }//GEN-LAST:event_loadDefaultFileButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel controlPanel;
     private javax.swing.JButton loadCustomFileButton;
     private javax.swing.JButton loadDefaultFileButton;
     private javax.swing.JLabel loadFileLabel;
+    private javax.swing.JButton resetButton;
     private javax.swing.JButton runButton;
     private javax.swing.JButton runOneButton;
     private javax.swing.JSeparator separator;
