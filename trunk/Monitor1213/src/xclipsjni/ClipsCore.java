@@ -15,23 +15,38 @@ public class ClipsCore {
 	private Environment clips;
 	private RouterDialog router;
 
-	/**Costruisce una nuova istanza di clips e carica un file clp
-	 *
-	 * @param path il percorso del file da caricare
+	/**Costruisce una nuova istanza di clips e carica i file clp di default
 	 */
-	public ClipsCore(String path) {
-            if(path.equals("default")) {
-		clips = new Environment();
-		clips.load("1_main.clp");
-                clips.load("2_initial_map.clp");
-                clips.load("3_env.clp");
-                clips.load("4_actual_map.clp");
-                clips.load("5_agent.clp");
-		String extensionsPath = "extensions" + File.separator + "regolaHalt.clp";
-		clips.load(extensionsPath);
-		router = new RouterDialog("routerCore");
-		clips.addRouter(router);
-            }
+	public ClipsCore() {
+            clips = new Environment();
+            clips.load("1_main.clp");
+            clips.load("2_initial_map.clp");
+            clips.load("3_env.clp");
+            clips.load("4_actual_map.clp");
+            clips.load("5_agent.clp");
+            String extensionsPath = "extensions" + File.separator + "regolaHalt.clp";
+            clips.load(extensionsPath);
+            router = new RouterDialog("routerCore");
+            clips.addRouter(router);
+	}
+        
+        /**Costruisce una nuova istanza di clips e carica
+         * i file clp contenenti le mappe "initial" ed "actual"
+	 *
+	 * @param initialPath il percorso del file contenente la mappa "initial"
+         * @param actualPath il percorso del file contenente la mappa "actual"
+	 */
+        public ClipsCore(String initialPath, String actualPath) {
+            clips = new Environment();
+            clips.load("1_main.clp");
+            clips.load(initialPath);
+            clips.load("3_env.clp");
+            clips.load(actualPath);
+            clips.load("5_agent.clp");
+            String extensionsPath = "extensions" + File.separator + "regolaHalt.clp";
+            clips.load(extensionsPath);
+            router = new RouterDialog("routerCore");
+            clips.addRouter(router);
 	}
 
 	private void throwException(Exception ex) throws ClipsException {

@@ -56,9 +56,11 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="separator" alignment="0" pref="430" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="loadFileButton" min="-2" max="-2" attributes="0"/>
+                          <Component id="loadDefaultFileButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                          <Component id="loadCustomFileButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="loadFileLabel" pref="188" max="32767" attributes="0"/>
+                          <Component id="loadFileLabel" pref="157" max="32767" attributes="0"/>
                           <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -84,8 +86,9 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="loadFileButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="loadDefaultFileButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="loadFileLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="loadCustomFileButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Component id="separator" pref="10" max="32767" attributes="0"/>
@@ -104,12 +107,12 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="loadFileButton">
+        <Component class="javax.swing.JButton" name="loadDefaultFileButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Carica Ambiente Clips"/>
+            <Property name="text" type="java.lang.String" value="Default"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="loadFileButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="loadDefaultFileButtonActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="loadFileLabel">
@@ -173,6 +176,14 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="visualizeFactsButtonActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="loadCustomFileButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Scegli mappe"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="loadCustomFileButtonActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

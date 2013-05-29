@@ -13,113 +13,123 @@ import javax.swing.JPanel;
 import javax.swing.filechooser.FileFilter;
 import monitor1213.DebugFrame;
 
-/**Questa classe implementa il pannello di controllo di clips, questo modulo consente di svolgere tutte le azioni più utili,
- * fra cui: caricamento di un file clips, run, run(1) e run di un turno, visualizzazione agenda e visualizzazione fatti.
- * Questo pannello può essere integrato in un'interfaccia comprendente altre componenti, grazie al metodo getControlPanel(),
- * oppure può essere usato come finestra a se stante semplicemente attraverso il costruttore.
+/**
+ * Questa classe implementa il pannello di controllo di clips, questo modulo
+ * consente di svolgere tutte le azioni più utili, fra cui: caricamento di un
+ * file clips, run, run(1) e run di un turno, visualizzazione agenda e
+ * visualizzazione fatti. Questo pannello può essere integrato in un'interfaccia
+ * comprendente altre componenti, grazie al metodo getControlPanel(), oppure può
+ * essere usato come finestra a se stante semplicemente attraverso il
+ * costruttore.
  *
- * @author Piovesan Luca, Verdoja Francesco
- * Edited by: @author  Violanti Luca, Varesano Marco, Busso Marco, Cotrino Roberto
+ * @author Piovesan Luca, Verdoja Francesco Edited by:
+ * @author Violanti Luca, Varesano Marco, Busso Marco, Cotrino Roberto
  */
 class ControlPanel extends JFrame implements Observer {
 
-	ClipsModel model;
-	PropertyMonitor agendaMonitor;
-	PropertyMonitor factsMonitor;
-        PropertyMonitor debugMonitor;
+    ClipsModel model;
+    PropertyMonitor agendaMonitor;
+    PropertyMonitor factsMonitor;
+    PropertyMonitor debugMonitor;
 
-	/** Crea un nuovo Pannello di controllo per un ambiente clips
-	 * 
-	 * @param model il modello da controllare
-	 */
-	public ControlPanel(ClipsModel model) {
-		initComponents();
-		this.model = model;
-                Dimension screenDim = Toolkit.getDefaultToolkit().getScreenSize();
-                Dimension propertyMonitorDim = new Dimension(600, 325);
-                
-		agendaMonitor = new PropertyMonitor("Agenda");
-                agendaMonitor.setSize(propertyMonitorDim);
-                //agendaMonitor.setLocation(625, 0);                
-		agendaMonitor.setLocation(screenDim.width - agendaMonitor.getWidth(), 0);
-                
-		factsMonitor = new PropertyMonitor("Fatti");
-                factsMonitor.setSize(propertyMonitorDim);
-                //factsMonitor.setLocation(975,0);
-                factsMonitor.setLocation(screenDim.width - factsMonitor.getWidth(), agendaMonitor.getHeight());
-                factsMonitor.setAutoScroll();
-                
+    /**
+     * Crea un nuovo Pannello di controllo per un ambiente clips
+     *
+     * @param model il modello da controllare
+     */
+    public ControlPanel(ClipsModel model) {
+        initComponents();
+        this.model = model;
+        Dimension screenDim = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension propertyMonitorDim = new Dimension(600, 325);
 
-                
-		this.model.addObserver((Observer) this);
-                agendaMonitor.addWindowListener(new WindowListener()
-                {
-                    @Override
-                    public void windowClosing(WindowEvent e)
-                    {
-                        visualizeAgendaButton.setSelected(false);
-                    }
+        agendaMonitor = new PropertyMonitor("Agenda");
+        agendaMonitor.setSize(propertyMonitorDim);
+        //agendaMonitor.setLocation(625, 0);                
+        agendaMonitor.setLocation(screenDim.width - agendaMonitor.getWidth(), 0);
 
-                    @Override
-                    public void windowOpened(WindowEvent e) {
-                        visualizeAgendaButton.setSelected(true);
-                    }
+        factsMonitor = new PropertyMonitor("Fatti");
+        factsMonitor.setSize(propertyMonitorDim);
+        //factsMonitor.setLocation(975,0);
+        factsMonitor.setLocation(screenDim.width - factsMonitor.getWidth(), agendaMonitor.getHeight());
+        factsMonitor.setAutoScroll();
 
-                    @Override
-                    public void windowClosed(WindowEvent e) {}
+        this.model.addObserver((Observer) this);
+        agendaMonitor.addWindowListener(new WindowListener() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                visualizeAgendaButton.setSelected(false);
+            }
 
-                    @Override
-                    public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowOpened(WindowEvent e) {
+                visualizeAgendaButton.setSelected(true);
+            }
 
-                    @Override
-                    public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+            }
 
-                    @Override
-                    public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowIconified(WindowEvent e) {
+            }
 
-                    @Override
-                    public void windowDeactivated(WindowEvent e) {}
-                });
-                
-                factsMonitor.addWindowListener(new WindowListener()
-                {
-                    @Override
-                    public void windowClosing(WindowEvent e)
-                    {
-                        visualizeFactsButton.setSelected(false);
-                    }
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+            }
 
-                    @Override
-                    public void windowOpened(WindowEvent e) {
-                        visualizeFactsButton.setSelected(true);
-                    }
+            @Override
+            public void windowActivated(WindowEvent e) {
+            }
 
-                    @Override
-                    public void windowClosed(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+            }
+        });
 
-                    @Override
-                    public void windowIconified(WindowEvent e) {}
+        factsMonitor.addWindowListener(new WindowListener() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                visualizeFactsButton.setSelected(false);
+            }
 
-                    @Override
-                    public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowOpened(WindowEvent e) {
+                visualizeFactsButton.setSelected(true);
+            }
 
-                    @Override
-                    public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+            }
 
-                    @Override
-                    public void windowDeactivated(WindowEvent e) {}
-                });
-         }
+            @Override
+            public void windowIconified(WindowEvent e) {
+            }
 
-	/** Questo metodo è chiamato dal costruttore e inizializza il form
-	 * WARNING: NON modificare assolutamente questo metodo.
-	 */
-	@SuppressWarnings("unchecked")
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+            }
+
+            @Override
+            public void windowActivated(WindowEvent e) {
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+            }
+        });
+    }
+
+    /**
+     * Questo metodo è chiamato dal costruttore e inizializza il form WARNING:
+     * NON modificare assolutamente questo metodo.
+     */
+    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         controlPanel = new javax.swing.JPanel();
-        loadFileButton = new javax.swing.JButton();
+        loadDefaultFileButton = new javax.swing.JButton();
         loadFileLabel = new javax.swing.JLabel();
         separator = new javax.swing.JSeparator();
         runButton = new javax.swing.JButton();
@@ -128,6 +138,7 @@ class ControlPanel extends JFrame implements Observer {
         visualizeLabel = new javax.swing.JLabel();
         visualizeAgendaButton = new javax.swing.JCheckBox();
         visualizeFactsButton = new javax.swing.JCheckBox();
+        loadCustomFileButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pannello di Controllo");
@@ -137,10 +148,10 @@ class ControlPanel extends JFrame implements Observer {
         controlPanel.setMinimumSize(new java.awt.Dimension(450, 90));
         controlPanel.setPreferredSize(new java.awt.Dimension(450, 90));
 
-        loadFileButton.setText("Carica Ambiente Clips");
-        loadFileButton.addActionListener(new java.awt.event.ActionListener() {
+        loadDefaultFileButton.setText("Default");
+        loadDefaultFileButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loadFileButtonActionPerformed(evt);
+                loadDefaultFileButtonActionPerformed(evt);
             }
         });
 
@@ -194,6 +205,13 @@ class ControlPanel extends JFrame implements Observer {
             }
         });
 
+        loadCustomFileButton.setText("Scegli mappe");
+        loadCustomFileButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadCustomFileButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout controlPanelLayout = new javax.swing.GroupLayout(controlPanel);
         controlPanel.setLayout(controlPanelLayout);
         controlPanelLayout.setHorizontalGroup(
@@ -203,9 +221,11 @@ class ControlPanel extends JFrame implements Observer {
                 .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(separator, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
                     .addGroup(controlPanelLayout.createSequentialGroup()
-                        .addComponent(loadFileButton)
+                        .addComponent(loadDefaultFileButton)
+                        .addGap(4, 4, 4)
+                        .addComponent(loadCustomFileButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(loadFileLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                        .addComponent(loadFileLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
                         .addGap(103, 103, 103))
                     .addGroup(controlPanelLayout.createSequentialGroup()
                         .addComponent(runButton)
@@ -226,8 +246,9 @@ class ControlPanel extends JFrame implements Observer {
             .addGroup(controlPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(loadFileButton)
-                    .addComponent(loadFileLabel))
+                    .addComponent(loadDefaultFileButton)
+                    .addComponent(loadFileLabel)
+                    .addComponent(loadCustomFileButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(separator, javax.swing.GroupLayout.DEFAULT_SIZE, 10, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -255,36 +276,16 @@ class ControlPanel extends JFrame implements Observer {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-	/**azione eseguita quando si preme il bottone per il caricamento del file clips
-	 * 
-	 * @param evt l'evento scatenante l'azione
-	 */
-	private void loadFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadFileButtonActionPerformed
-//		final JFileChooser chooser = new JFileChooser(".");
-//		chooser.addChoosableFileFilter(new ClpFileFilter());
-//		int returnval = chooser.showDialog(null, "Carica Ambiente Clips");
-//		if (returnval == JFileChooser.APPROVE_OPTION) {
-//			File file = chooser.getSelectedFile();
-//			String path = file.getAbsolutePath();
-//			model.startCore(path);
-//			loadFileButton.setEnabled(false);
-//			loadFileLabel.setText(filename(path));
-//			loadFileLabel.setEnabled(true);
-//			runButton.setEnabled(true);
-//			stepButton.setEnabled(true);
-//			runOneButton.setEnabled(true);
-//			visualizeLabel.setEnabled(true);
-//			visualizeAgendaButton.setEnabled(true);
-//			visualizeFactsButton.setEnabled(true);
-//			model.execute();
-//		}
-//                else if (returnval != JFileChooser.CANCEL_OPTION && returnval != JFileChooser.ABORT) {
-//			throw new IllegalArgumentException("Incorrect file extension");
-//		}
-                       	
-            model.startCore("default");
-            loadFileButton.setEnabled(false);
-            loadFileLabel.setText(filename("Default"));
+    /**
+     * azione eseguita quando si preme il bottone per il caricamento del file
+     * clips di default
+     *
+     * @param evt l'evento scatenante l'azione
+     */
+	private void loadDefaultFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadDefaultFileButtonActionPerformed
+            loadDefaultFileButton.setEnabled(false);
+            loadCustomFileButton.setEnabled(false);
+            loadFileLabel.setText("Default");
             loadFileLabel.setEnabled(true);
             runButton.setEnabled(true);
             stepButton.setEnabled(true);
@@ -292,64 +293,115 @@ class ControlPanel extends JFrame implements Observer {
             visualizeLabel.setEnabled(true);
             visualizeAgendaButton.setEnabled(true);
             visualizeFactsButton.setEnabled(true);
+            model.startCore();
             model.execute();
-	}//GEN-LAST:event_loadFileButtonActionPerformed
+	}//GEN-LAST:event_loadDefaultFileButtonActionPerformed
 
-	/**azione eseguita quando si preme il checkbox per la visualizzazione dei fatti
-	 * 
-	 * @param evt l'evento scatenante l'azione
-	 */
+    /**
+     * azione eseguita quando si preme il checkbox per la visualizzazione dei
+     * fatti
+     *
+     * @param evt l'evento scatenante l'azione
+     */
 	private void visualizeFactsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visualizeFactsButtonActionPerformed
-		factsMonitor.setVisible(visualizeFactsButton.isSelected());
+            factsMonitor.setVisible(visualizeFactsButton.isSelected());
 	}//GEN-LAST:event_visualizeFactsButtonActionPerformed
 
-	/**azione eseguita quando si preme il tasto Run
-	 * 
-	 * @param evt l'evento scatenante l'azione
-	 */
+    /**
+     * azione eseguita quando si preme il tasto Run
+     *
+     * @param evt l'evento scatenante l'azione
+     */
 	private void runButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runButtonActionPerformed
-		if (runButton.getText().equals("Run")) {
-			model.setMode("RUN");
-			model.resume();
-			runButton.setText("Stop");
-			stepButton.setEnabled(false);
-			runOneButton.setEnabled(false);
-		} else {
-			model.setMode("STEP");
-			runButton.setText("Run");
-			stepButton.setEnabled(true);
-			runOneButton.setEnabled(true);
-		}
+            if (runButton.getText().equals("Run")) {
+                model.setMode("RUN");
+                model.resume();
+                runButton.setText("Stop");
+                stepButton.setEnabled(false);
+                runOneButton.setEnabled(false);
+            } else {
+                model.setMode("STEP");
+                runButton.setText("Run");
+                stepButton.setEnabled(true);
+                runOneButton.setEnabled(true);
+            }
 	}//GEN-LAST:event_runButtonActionPerformed
 
-	/**azione eseguita quando si preme il tasto Step
-	 * 
-	 * @param evt l'evento scatenante l'azione
-	 */
+    /**
+     * azione eseguita quando si preme il tasto Step
+     *
+     * @param evt l'evento scatenante l'azione
+     */
 	private void stepButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stepButtonActionPerformed
-		model.setMode("STEP");
-		model.resume();
+            model.setMode("STEP");
+            model.resume();
 	}//GEN-LAST:event_stepButtonActionPerformed
 
-	/**azione eseguita quando si preme il checkbox per la visualizzazione dell'agenda
-	 * 
-	 * @param evt l'evento scatenante l'azione
-	 */
+    /**
+     * azione eseguita quando si preme il checkbox per la visualizzazione
+     * dell'agenda
+     *
+     * @param evt l'evento scatenante l'azione
+     */
 	private void visualizeAgendaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visualizeAgendaButtonActionPerformed
-		agendaMonitor.setVisible(visualizeAgendaButton.isSelected());
+            agendaMonitor.setVisible(visualizeAgendaButton.isSelected());
 	}//GEN-LAST:event_visualizeAgendaButtonActionPerformed
 
-	/**azione eseguita quando si preme il tasto Run(1)
-	 * 
-	 * @param evt l'evento scatenante l'azione
-	 */
+    /**
+     * azione eseguita quando si preme il tasto Run(1)
+     *
+     * @param evt l'evento scatenante l'azione
+     */
 	private void runOneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runOneButtonActionPerformed
-		model.setMode("RUNONE");
-		model.resume();
+            model.setMode("RUNONE");
+            model.resume();
 	}//GEN-LAST:event_runOneButtonActionPerformed
+
+    /**
+     * azione eseguita quando si preme il bottone per il caricamento dei file
+     * clips con le mappe "initial" e "actual"
+     *
+     * @param evt l'evento scatenante l'azione
+     */
+    private void loadCustomFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadCustomFileButtonActionPerformed
+        final JFileChooser chooser = new JFileChooser(".");
+        chooser.addChoosableFileFilter(new ClpFileFilter());
+        int returnval = chooser.showDialog(null, "Carica mappa iniziale");
+        int returnval2 = 0;
+        String initialPath = "", actualPath = "";
+        File file;
+
+        if (returnval == JFileChooser.APPROVE_OPTION) {
+            file = chooser.getSelectedFile();
+            initialPath = file.getAbsolutePath();
+
+            final JFileChooser chooser2 = new JFileChooser(".");
+            chooser2.addChoosableFileFilter(new ClpFileFilter());
+            returnval2 = chooser2.showDialog(null, "Carica mappa reale");
+            if (returnval2 == JFileChooser.APPROVE_OPTION) {
+                file = chooser2.getSelectedFile();
+                actualPath = file.getAbsolutePath();
+                loadDefaultFileButton.setEnabled(false);
+                loadCustomFileButton.setEnabled(false);
+                loadFileLabel.setText("Iniziale: " + filename(initialPath) + ", finale: " + filename(actualPath));
+                loadFileLabel.setEnabled(true);
+                runButton.setEnabled(true);
+                stepButton.setEnabled(true);
+                runOneButton.setEnabled(true);
+                visualizeLabel.setEnabled(true);
+                visualizeAgendaButton.setEnabled(true);
+                visualizeFactsButton.setEnabled(true);
+                model.startCore(initialPath, actualPath);
+                model.execute();
+            }
+        } else if (returnval != JFileChooser.CANCEL_OPTION && returnval != JFileChooser.ABORT && returnval2 != JFileChooser.CANCEL_OPTION && returnval2 != JFileChooser.ABORT) {
+            throw new IllegalArgumentException("Incorrect file extension");
+        }
+    }//GEN-LAST:event_loadCustomFileButtonActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel controlPanel;
-    private javax.swing.JButton loadFileButton;
+    private javax.swing.JButton loadCustomFileButton;
+    private javax.swing.JButton loadDefaultFileButton;
     private javax.swing.JLabel loadFileLabel;
     private javax.swing.JButton runButton;
     private javax.swing.JButton runOneButton;
@@ -360,66 +412,68 @@ class ControlPanel extends JFrame implements Observer {
     private javax.swing.JLabel visualizeLabel;
     // End of variables declaration//GEN-END:variables
 
-	/**Metodo per ottenere un'istanza del pannello di controllo
-	 * 
-	 * @return il pannello di controllo racchiuso in un JPanel
-	 */
-	public JPanel getControlPanel() {
-		return controlPanel;
-	}
+    /**
+     * Metodo per ottenere un'istanza del pannello di controllo
+     *
+     * @return il pannello di controllo racchiuso in un JPanel
+     */
+    public JPanel getControlPanel() {
+        return controlPanel;
+    }
 
-	@Override
-	public void update(Observable o, Object o1) {
-		try {
-			if (agendaMonitor.isVisible()) {
-				agendaMonitor.setText(model.getAgenda());
-			} else {
-				visualizeAgendaButton.setSelected(false);
-			}
-			if (factsMonitor.isVisible()) {
-				factsMonitor.setText(model.getFactList());
-			} else {
-				visualizeFactsButton.setSelected(false);
-			}
-		} catch (Exception ex) {
-			//System.out.println("[ERRORE] " + ex.toString());
-                        DebugFrame.appendText("[ERRORE] " + ex.toString());
-		}
-	}
+    @Override
+    public void update(Observable o, Object o1) {
+        try {
+            if (agendaMonitor.isVisible()) {
+                agendaMonitor.setText(model.getAgenda());
+            } else {
+                visualizeAgendaButton.setSelected(false);
+            }
+            if (factsMonitor.isVisible()) {
+                factsMonitor.setText(model.getFactList());
+            } else {
+                visualizeFactsButton.setSelected(false);
+            }
+        } catch (Exception ex) {
+            //System.out.println("[ERRORE] " + ex.toString());
+            DebugFrame.appendText("[ERRORE] " + ex.toString());
+        }
+    }
 
-	/**Estrae il nome di un file (con l'estensione) da un path.
-	 * 
-	 * @param path un path ad un file
-	 * @return una stringa contenente solo il nome del file
-	 */
-	static private String filename(String path) {
-		int i = path.lastIndexOf(File.separator);
-		return path.substring(i + 1, path.length());
-	}
+    /**
+     * Estrae il nome di un file (con l'estensione) da un initialPath.
+     *
+     * @param initialPath un initialPath ad un file
+     * @return una stringa contenente solo il nome del file
+     */
+    static private String filename(String path) {
+        int i = path.lastIndexOf(File.separator);
+        return path.substring(i + 1, path.length());
+    }
 
-	private class ClpFileFilter extends FileFilter {
+    private class ClpFileFilter extends FileFilter {
 
-		@Override
-		public boolean accept(File f) {
-			if (f.isDirectory()) {
-				return true;
-			}
-			String ext = null;
-			String s = f.getName();
-			int i = s.lastIndexOf('.');
+        @Override
+        public boolean accept(File f) {
+            if (f.isDirectory()) {
+                return true;
+            }
+            String ext = null;
+            String s = f.getName();
+            int i = s.lastIndexOf('.');
 
-			if (i > 0 && i < s.length() - 1) {
-				ext = s.substring(i + 1).toLowerCase();
-			}
-			if (ext.equalsIgnoreCase("clp")) {
-				return true;
-			}
-			return false;
-		}
+            if (i > 0 && i < s.length() - 1) {
+                ext = s.substring(i + 1).toLowerCase();
+            }
+            if (ext.equalsIgnoreCase("clp")) {
+                return true;
+            }
+            return false;
+        }
 
-		@Override
-		public String getDescription() {
-			return "Clips files";
-		}
-	}
+        @Override
+        public String getDescription() {
+            return "Clips files";
+        }
+    }
 }
