@@ -260,27 +260,39 @@ class ControlPanel extends JFrame implements Observer {
 	 * @param evt l'evento scatenante l'azione
 	 */
 	private void loadFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadFileButtonActionPerformed
-		final JFileChooser chooser = new JFileChooser(".");
-		chooser.addChoosableFileFilter(new ClpFileFilter());
-		int returnval = chooser.showDialog(null, "Carica Ambiente Clips");
-		if (returnval == JFileChooser.APPROVE_OPTION) {
-			File file = chooser.getSelectedFile();
-			String path = file.getAbsolutePath();
-			model.startCore(path);
-			loadFileButton.setEnabled(false);
-			loadFileLabel.setText(filename(path));
-			loadFileLabel.setEnabled(true);
-			runButton.setEnabled(true);
-			stepButton.setEnabled(true);
-			runOneButton.setEnabled(true);
-			visualizeLabel.setEnabled(true);
-			visualizeAgendaButton.setEnabled(true);
-			visualizeFactsButton.setEnabled(true);
-			model.execute();
-		}
-                else if (returnval != JFileChooser.CANCEL_OPTION && returnval != JFileChooser.ABORT) {
-			throw new IllegalArgumentException("Incorrect file extension");
-		}
+//		final JFileChooser chooser = new JFileChooser(".");
+//		chooser.addChoosableFileFilter(new ClpFileFilter());
+//		int returnval = chooser.showDialog(null, "Carica Ambiente Clips");
+//		if (returnval == JFileChooser.APPROVE_OPTION) {
+//			File file = chooser.getSelectedFile();
+//			String path = file.getAbsolutePath();
+//			model.startCore(path);
+//			loadFileButton.setEnabled(false);
+//			loadFileLabel.setText(filename(path));
+//			loadFileLabel.setEnabled(true);
+//			runButton.setEnabled(true);
+//			stepButton.setEnabled(true);
+//			runOneButton.setEnabled(true);
+//			visualizeLabel.setEnabled(true);
+//			visualizeAgendaButton.setEnabled(true);
+//			visualizeFactsButton.setEnabled(true);
+//			model.execute();
+//		}
+//                else if (returnval != JFileChooser.CANCEL_OPTION && returnval != JFileChooser.ABORT) {
+//			throw new IllegalArgumentException("Incorrect file extension");
+//		}
+                       	
+            model.startCore("default");
+            loadFileButton.setEnabled(false);
+            loadFileLabel.setText(filename("Default"));
+            loadFileLabel.setEnabled(true);
+            runButton.setEnabled(true);
+            stepButton.setEnabled(true);
+            runOneButton.setEnabled(true);
+            visualizeLabel.setEnabled(true);
+            visualizeAgendaButton.setEnabled(true);
+            visualizeFactsButton.setEnabled(true);
+            model.execute();
 	}//GEN-LAST:event_loadFileButtonActionPerformed
 
 	/**azione eseguita quando si preme il checkbox per la visualizzazione dei fatti
