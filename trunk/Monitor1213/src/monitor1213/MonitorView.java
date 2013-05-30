@@ -98,7 +98,7 @@ public class MonitorView extends ClipsView implements Observer {
     private void initializeInterface() {
         view = new JFrame();
         view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        view.setSize(new Dimension(500, 150));
+        view.setSize(new Dimension(640, 150));
         view.setResizable(false);
         view.setTitle("Monitor 2012/2013");
         view.setLayout(new BorderLayout());
