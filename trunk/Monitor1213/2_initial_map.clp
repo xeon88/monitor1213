@@ -1,4 +1,13 @@
-(deffacts init (create) (maxduration 1000))
+; questa asserzione va ovviamente cambiata a seconda del tipo di ambiente che
+; si utilizza
+(deffacts init (create)
+	(maxduration 1000)
+	(initial_agentstatus
+		(pos-r 1) (pos-c 5)
+		(direction north)
+	)
+)
+
 (deffacts initialmap
              (prior_cell (pos-r 1) (pos-c 1) (type border))
              (prior_cell (pos-r 1) (pos-c 2) (type border))

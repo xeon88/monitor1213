@@ -29,8 +29,6 @@
 	(slot abstract)
     (slot precise))                         
 
-
-
 (defrule creation2
 (declare (salience 24))
       (create-discovered)
@@ -63,15 +61,15 @@
                           (discover no) (abstract ok) (precise ok)))
       )
 
-
  (defrule creation-start
  (declare (salience 23))
  ?f1 <-   (create-initial-setting)
  ?f2 <-   (create-discovered)
+ ?f3 <-   (initial_agentstatus (pos-r ?r) (pos-c ?c) (direction ?d))
  =>
     (assert (status (time 0) (step 0)(result no))
-            (agentstatus  (step 0) (time 0) (pos-r 1) (pos-c 5) 
-                          (direction north) (dur-last-act 0))
+            (agentstatus  (step 0) (time 0) (pos-r ?r) (pos-c ?c) 
+                          (direction ?d) (dur-last-act 0))
             (penalty 0))
       (retract ?f1 ?f2)
       (focus MAIN))
