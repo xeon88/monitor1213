@@ -55,7 +55,7 @@
 
 ; questa asserzione va ovviamente cambiata a seconda del tipo di ambiente che
 ; si utilizza
-(deffacts init (create) (maxduration 1000))
+
 
 
 

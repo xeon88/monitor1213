@@ -1,3 +1,4 @@
+(deffacts init (create) (maxduration 1000))
 (deffacts initialmap
              (prior_cell (pos-r 1) (pos-c 1) (type border))
              (prior_cell (pos-r 1) (pos-c 2) (type border))
