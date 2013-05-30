@@ -49,15 +49,18 @@
 ;; degli eventi meteorologici che sono causa dell’esondazione. 
 ;; Questa  conoscenza a priori è definita nel MAIN e quindi è accessibile anche all’agente.
 (deftemplate prior_cell 
-                  (slot pos-r)
-                  (slot pos-c)
-                  (slot type (allowed-values urban rural lake hill gate border)))
+	(slot pos-r)
+	(slot pos-c)
+	(slot type (allowed-values urban rural lake hill gate border)))
 
-; questa asserzione va ovviamente cambiata a seconda del tipo di ambiente che
-; si utilizza
+;;  questo template serve solo per avere una struttura per asserire lo stato iniziale dell'agente
+;;  L'informazione deve essere messa nel file 2_initial_map.clp
+;;  quasta info viene propagata per mezzo di regole sia ad agenstatus in ENV che in kagent in AGENT
 
-
-
+(deftemplate initial_agentstatus 
+	(slot pos-r) 
+	(slot pos-c)
+	(slot direction))
 
 (defrule createworld 
     ?f<-   (create) =>

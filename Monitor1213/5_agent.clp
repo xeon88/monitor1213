@@ -9,10 +9,11 @@
     (declare (salience 10))
     (status (step 0))
     (not (exec (step 0)))
+    (initial_agentstatus (pos-r ?r) (pos-c ?c) (direction ?d))
   => 
     (assert (kagent (time 0) (step 0)
-                           (pos-r 1) (pos-c 5) (direction north)))
-    )
+                           (pos-r ?r) (pos-c ?c) (direction ?d)))
+    )
 
 ;; COMMENTATO PER VEDERLO NELL'INTERFACCIA
 ;;(defrule ask_act
