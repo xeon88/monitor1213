@@ -45,7 +45,8 @@ public class DebugFrame extends JFrame {
                         }
                 });
                 this.repaint();
-                this.setVisible(true);
+                //this.setVisible(true);
+                this.setVisible(false);
         }
 
         private JPanel getJContentPane() {
