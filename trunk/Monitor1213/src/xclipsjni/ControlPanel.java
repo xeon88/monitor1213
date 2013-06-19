@@ -2,6 +2,8 @@ package xclipsjni;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
@@ -10,9 +12,11 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 import javax.swing.filechooser.FileFilter;
 import monitor1213.DebugFrame;
 
@@ -152,6 +156,12 @@ class ControlPanel extends JFrame implements Observer {
         controlPanel.setRequestFocusEnabled(false);
 
         loadDefaultFileButton.setText("Default");
+        loadDefaultFileButton.getInputMap(loadDefaultFileButton.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_D, ActionEvent.CTRL_MASK), "loadDefaultFileButton");
+        loadDefaultFileButton.getActionMap().put("loadDefaultFileButton", new AbstractAction() {
+			public void actionPerformed(ActionEvent e) {
+				loadDefaultFileButtonActionPerformed(e);
+			}
+		});
         loadDefaultFileButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loadDefaultFileButtonActionPerformed(evt);
@@ -165,7 +175,13 @@ class ControlPanel extends JFrame implements Observer {
 
         runButton.setText("Run");
         runButton.setToolTipText("Esegue la Run di Clips");
+        runButton.getInputMap(runButton.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_R, ActionEvent.CTRL_MASK), "runButton");
         runButton.setEnabled(false);
+        runButton.getActionMap().put("runButton", new AbstractAction() {
+			public void actionPerformed(ActionEvent e) {
+				runButtonActionPerformed(e);
+			}
+		});
         runButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 runButtonActionPerformed(evt);
@@ -174,7 +190,13 @@ class ControlPanel extends JFrame implements Observer {
 
         stepButton.setText("Step");
         stepButton.setToolTipText("Esegue Run fino alla prossima azione del Robot");
+        stepButton.getInputMap(stepButton.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK), "stepButton");
         stepButton.setEnabled(false);
+        stepButton.getActionMap().put("stepButton", new AbstractAction() {
+			public void actionPerformed(ActionEvent e) {
+				stepButtonActionPerformed(e);
+			}
+		});
         stepButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 stepButtonActionPerformed(evt);
@@ -183,7 +205,13 @@ class ControlPanel extends JFrame implements Observer {
 
         runOneButton.setText("Run(1)");
         runOneButton.setToolTipText("Esegue la Run(1) di Clips");
+        runOneButton.getInputMap(runOneButton.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_T, ActionEvent.CTRL_MASK), "runOneButton");
         runOneButton.setEnabled(false);
+        runOneButton.getActionMap().put("runOneButton", new AbstractAction() {
+			public void actionPerformed(ActionEvent e) {
+				runOneButtonActionPerformed(e);
+			}
+		});
         runOneButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 runOneButtonActionPerformed(evt);
@@ -209,8 +237,14 @@ class ControlPanel extends JFrame implements Observer {
                 visualizeFactsButtonActionPerformed(evt);
             }
         });
-
+		
         loadCustomFileButton.setText("Scegli mappe");
+        loadCustomFileButton.getInputMap(loadCustomFileButton.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_M, ActionEvent.CTRL_MASK), "loadCustomFileButton");
+        loadCustomFileButton.getActionMap().put("loadCustomFileButton", new AbstractAction() {
+			public void actionPerformed(ActionEvent e) {
+				loadCustomFileButtonActionPerformed(e);
+			}
+		});
         loadCustomFileButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loadCustomFileButtonActionPerformed(evt);
@@ -220,6 +254,12 @@ class ControlPanel extends JFrame implements Observer {
         resetButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         resetButton.setForeground(new java.awt.Color(255, 0, 0));
         resetButton.setText("RESET");
+        resetButton.getInputMap(resetButton.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK), "resetButton");
+        resetButton.getActionMap().put("resetButton", new AbstractAction() {
+			public void actionPerformed(ActionEvent e) {
+				resetButtonActionPerformed(e);
+			}
+		});
         resetButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 resetButtonActionPerformed(evt);
